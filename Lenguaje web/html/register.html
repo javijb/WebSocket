@@ -1,0 +1,123 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>Register</title>
+		<link href="../css/bg.css" type="text/css" rel="stylesheet"/>
+		<script src="JavaScript/MainScripts.js"></script>
+	</head>
+	<body>
+	<center>
+	<div>
+		<div id="header">
+		<img src="../images/banner-adidas.jpg" width="1200" height="150">
+		<ul>
+  			<li><a href="home.html">Inicio</a></li>
+  			<li><a href="catalogo.html">Catalogo</a></li>
+  			<li><a href="historia.html">Nuestra historia</a></li>
+  			<li><a href="contacto.html">Contacto</a></li>
+			<li><a class="login" href="login.html">Login/Register</a></li> 
+		</ul>
+		</div>
+	</center>
+	<div class="row">
+		<div class="col-2" vertical-align="center">
+			<a href="home.html"><img src="../images/69524.png" width="65" height="65" hspace="10" /></a>
+			<a href="carrito.html"><img src="../images/107831.png" width="65" height="65" hspace="10"/></a>
+			<a href="busqueda.html"><img src="../images/14-512.png" width="65" height="65" hspace="15"/></a>
+  			<br><br>
+  			<a href="https://www.adidas.es/mujer"><img src="../images/womenadidas.jpg" width="290" height="340"/></a>
+ 		</div>
+		<div class="col-8">
+		<br>
+		<center>
+		<b>
+		<form action="home.html" id="formdatospersonales" target="_blank" method="get">
+			<table>
+				<thead>
+					<tr colspan="4">
+						<b><caption align="center">FORMULARIO DE REGISTRO</caption></b>
+					</tr>
+				</thead>
+				<tbody>	
+					<tr>
+						<td align="center">Nombre:*</td>
+						<td>
+							<input type=”text” name=”nombre” required>
+						</td>
+						<td align="center">Apellidos:*</td>
+						<td>
+							<input type=”text” name=”apellido” required>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">Email:*</td>
+						<td>
+							<input type="email" name="email" required>
+						</td>
+						<td align="center">Teléfono*:</td>
+						<td>
+							<input type="tel" name="usrtel">
+						</td>
+					</tr>
+					<tr>
+						<td>Contraseña*:</td>
+						<td>
+							<input type="password" name="password" required>
+						</td>
+						<td>Fecha de Nacimiento*:</td>
+						<td>
+							<input type="date" name="fecha" required>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">Género:*</td>
+						<td align="center">
+							M:<input type="radio" name="gen" value="Masculino">
+							F:<input type="radio" name="gen" value="Femenino">
+							O:<input type="radio" name="gen" value="Otro" checked>
+						<td align="center">Nacionalidad:*</td>
+						<td>
+							<Select name="nacionalidad" required>
+								<option value=”v1”>Alemania</option>
+								<option value=”v2”>Argentina</option>
+								<option value=”v3”>Brasil</option>
+								<option value=”v4”>España</option>
+								<option value=”v5”>Estados Unidos</option>
+								<option value=”v6”>Francia</option>
+								<option value=”v7”>Holanda</option>
+								<option value=”v8”>Inglaterra</option>
+								<option value=”v9”>Italia</option>
+								<option value=”v10”>Portugal</option>
+								<option value=”v11”>Otro</option>
+						</td>
+					</tr>
+					<tr>
+						<td>Provincia*:</td>
+						<td>
+							<input type="text" name="prov" required>
+						</td>
+						<td>Direccion*:</td>
+						<td>
+							<input type="text" name="dir" required>
+						</td>
+					</tr>
+				</tbody>
+			</table><br>
+			<button type="button" value="Register" onclick="crearUsuario()">Registrate</button>
+			<input type="reset">
+		</form>
+	</b>
+  		</div>
+		<div class="col-2">
+  		</div>
+  	</center>
+	</div>
+	<div class="footer">
+  		<a href="https://www.instagram.com/adidas/?hl=es"><img src="../images/insta.png" width="25" height="25" hspace="10" /></a>
+  		<a href="https://twitter.com/adidas_es?lang=es"><img src="../images/twitter.png" width="25" height="25" hspace="10" /></a>
+  		<a href="https://es-es.facebook.com/adidas/"><img src="../images/facebook.png" width="25" height="25" hspace="10" /></a><br>
+  		&reg; Registered All Rights Reserveds | Adidas 2019
+	</div>
+	</body>
+</html>

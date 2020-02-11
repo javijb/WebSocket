@@ -1,0 +1,245 @@
+body {
+	background-image: url("../images/walladi.jpg");
+  background-repeat: repeat-y;
+  background-repeat: repeat-x;
+  align-items: center;
+  margin: 10 0 10 0px;
+  border: 0;
+  padding: 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ }
+
+ul {
+  list-style-type: none;
+  margin: auto;
+  padding: auto;
+  overflow: none;
+  background-color: #000000;
+}
+
+li {
+  display: table-cell;
+  vertical-align: left;
+  text-align: center;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 17px 16px;
+  text-decoration: none;
+}
+
+
+li a:hover {
+  background-color: #096EBB;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+li .search-container {
+  float: left;
+  vertical-align: middle;
+}
+
+.bien {
+  font-size: 3em;
+  color: #FFFFFF;
+  padding: 15px;
+}
+
+.box {
+  display: inline-block;
+  border: 5px ridge black;
+  padding: 5px;
+  margin-left: 50px;
+  margin-bottom: 35px;
+  width: 275px;
+  background-color: #66ccff;
+}
+
+.product {
+  font-size: 1.5em;
+  font-color: black;
+  padding-bottom: 15px;
+  border-bottom: blue 3px solid;
+}
+
+.desc {
+  padding-bottom: 15px;
+  border-bottom: blue 3px solid;
+}
+
+.price {
+  font-size: 1.5em;
+  font-color: black;
+  font-weight: bold;
+}
+
+.comp {
+  background-color: #0066ff;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.parra {
+  background-color: #33b5e5;
+  color: #ffffff;
+  text-align: justify;
+}
+
+.search-container input[type=text] {
+  padding: 6px;
+  vertical-align: middle;
+  font-size: 17px;
+  border: 2px solid black;
+  float: left;
+}
+
+.search-container button {
+  float: left;
+  vertical-align: middle;
+  background: #dd;
+  font-size: 17px;
+  width: 80px;
+  height: 37px;
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+table {
+  border: blue 5px ridge; 
+}
+
+.holi {
+ margin-bottom: 100px;
+}
+
+td {
+  padding: 4px;
+  text-align: center;
+}
+
+tr {
+  padding: 4px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+  align-items: center;
+  
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+  align-items: center;
+}
+
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+
+.header {
+  background-color: #9933cc;
+  color: #ffffff;
+  padding: 15px;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: #33b5e5;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.menu li:hover {
+  background-color: #0099cc;
+}
+
+.aside {
+  background-color: #33b5e5;
+  padding: 15px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  margin-top: 50px;
+}
+
+.publi {
+  float: right;
+}
+
+.footer {
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  font-size: 12px;
+  padding: 15px;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  padding-top: 15px; 
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}

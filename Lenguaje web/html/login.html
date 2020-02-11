@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+                <script src="JavaScript/MainScripts.js"></script>
+		<title>Login</title>
+		<link href="../css/bg.css" type="text/css" rel="stylesheet"/>
+	</head>
+	<body>
+	<center>
+	<div>
+		<div id="header">
+		<img src="../images/banner-adidas.jpg" width="1200" height="150">
+		<ul>
+  			<li><a href="home.html">Inicio</a></li>
+  			<li><a href="catalogo.html">Catalogo</a></li>
+  			<li><a href="historia.html">Nuestra historia</a></li>
+  			<li><a href="contacto.html">Contacto</a></li>
+			<li><a class="login" href="login.html">Login/Register</a></li> 
+		</ul>
+		</div>
+	</center>
+	<div class="row">
+		<div class="col-2" vertical-align="center">
+			<a href="home.html"><img src="../images/69524.png" width="65" height="65" hspace="10" /></a>
+			<a href="carrito.html"><img src="../images/107831.png" width="65" height="65" hspace="10"/></a>
+			<a href="busqueda.html"><img src="../images/14-512.png" width="65" height="65" hspace="15"/></a>
+  			<br><br>
+  			<a href="https://www.adidas.es/mujer"><img src="../images/womenadidas.jpg" width="290" height="340"/></a>
+ 		</div>
+		<div class="col-8">
+		<center>
+			<h1>Bienvenido a Adidas</h1>
+		<form action="home.html" id="login" target="_blank" method="get">
+			<table>
+				<tbody>
+				<tr><td><b>Email:</b></td></tr>
+				<tr><td><input name="email" id="email" type="email" placeholder="Email..." vertical-align:middle required/></td></tr><br><br>
+				<tr><td><b>Password:</b></td></tr>
+				<tr><td><input name="pass" id="pass" type="password" placeholder="Password..." required/></td></tr><br><br>
+				<tr><td>Para registrarse haga click <a href="register.html"><b>aqui</b></a></td></tr>
+				</tbody>
+			</table>
+			<button name = "log" id="log" type="button" value="Sign In" onClick="cargarUsuario()">Entrar</button>
+			<input type="reset">
+		</form>
+		</center>
+  		</div>
+		<div class="col-2">
+  		</div>
+	</div>
+	<div class="footer">
+  		<a href="https://www.instagram.com/adidas/?hl=es"><img src="../images/insta.png" width="25" height="25" hspace="10" /></a>
+  		<a href="https://twitter.com/adidas_es?lang=es"><img src="../images/twitter.png" width="25" height="25" hspace="10" /></a>
+  		<a href="https://es-es.facebook.com/adidas/"><img src="../images/facebook.png" width="25" height="25" hspace="10" /></a><br>
+  		&reg; Registered All Rights Reserveds | Adidas 2019
+	</div>
+	</body>
+</html>
