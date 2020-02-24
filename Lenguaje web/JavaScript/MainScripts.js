@@ -1,59 +1,6 @@
+
 //Conexión WebSocket con servidor
-let socket = new WebSocket("");
-
-socket.onopen = function(event)
-{
-    
-    /// 1) Pedir las últimas búsquedas
-    console.log("Conexión con servidor.");
-    
-    /// 2) Crear un id y el JSON que se envía al servidor
-    var idMensaje = dameId();
-    
-    /// 3) Crear el mensaje de respuesta que debe esperar el cliente y añadirlo a la lista de mensajes en espera
-    mensaje = new mensajeEspera(idMensaje);
-    mensajesEsperandoRespuesta.push(mensaje);
-};
-
-socket.onclose = function(event)
-{
-    console.log("Conexión cerrada")
-};
-
-socket.onerror = function(event)
-{
-    console.log("Error");
-};
-
-socket.onmessage = function(event)
-{
-    
-    console.log(event.data);
-    
-    /// 1) Parsear el JSON
-    var mensaje = JSON.parse(event.data);
-    
-    /// 2) Recorrer los mensajes en espera y si existe ejecutamos la funcion correspondiente
-    if(mensaje != null)
-    {
-        
-        mensajesEsperandoRespuesta.forEach(mostrarMensajes);
-    
-        function mostrarMensajes(item, index)
-        {
-            
-            if(mensaje.id == item.id)
-            {
-                item.funcionEjecutar(mensaje.resultado); 
-            }
-            
-        }
-        
-    }
-    
-    
-};
-
+let socket = new WebSocket("ws://localhost:9990");
 
 class Usuario {
     
@@ -94,9 +41,9 @@ function crearUsuario()
     // 1) Coger los datos del registro
     var nombre = document.getElementById("nombre").value;
     var apellidos = document.getElementById("apellidos").value;
-    var email = document.getElementById("email2").value;
+    var email = document.getElementById("email").value;
     var tlf = document.getElementById("tlf").value;
-    var pass = document.getElementById("password").value;
+    var pass = document.getElementById("pass").value;
     var fecha = document.getElementById("fecha").value;
     var gen = document.getElementById("gen").value;
     var nacionalidad = document.getElementById("nacionalidad").value;
@@ -106,8 +53,8 @@ function crearUsuario()
     
     // 2) Crear JSON que se envia al servidor
     var idMensaje = dameId();
-    var obj = {action:"crearUsuario", id:idMensaje, nombre:nombre, apellidos:apellidos , email:email, tlf:tlf, pass:pass, fecha:fecha, gen:gen, nacionalidad:nacionalidad, prov:prov, dir:dir};
-    socket.send(JSON.stringify(obj));
+    var Json = {action:"crearUsuario", id:idMensaje, nombre:nombre, apellidos:apellidos , email:email, tlf:tlf, pass:pass, fecha:fecha, gen:gen, nacionalidad:nacionalidad, prov:prov, dir:dir};
+    socket.send(JSON.stringify(Json));
     
     // 3) Crear el mensaje de respuesta que debe esperar el cliente y añadirlo a la lista de mensajes en espera
     mensaje = new mensajeEspera(idMensaje);

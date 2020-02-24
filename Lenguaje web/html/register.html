@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>Register</title>
 		<link href="../css/bg.css" type="text/css" rel="stylesheet"/>
-		<script src="JavaScript/MainScripts.js"></script>
+		<script src="../JavaScript/MainScripts.js"></script>
 	</head>
 	<body>
 	<center>
@@ -43,68 +43,68 @@
 					<tr>
 						<td align="center">Nombre:*</td>
 						<td>
-							<input type=”text” name=”nombre” required>
+							<input type=”text” name=”nombre” id="nombre" required>
 						</td>
 						<td align="center">Apellidos:*</td>
 						<td>
-							<input type=”text” name=”apellido” required>
+							<input type=”text” name=”apellidos” id="apellidos" required>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">Email:*</td>
 						<td>
-							<input type="email" name="email" required>
+							<input type="email" name="email" id="email" required>
 						</td>
 						<td align="center">Teléfono*:</td>
 						<td>
-							<input type="tel" name="usrtel">
+							<input type="tel" name="tlf" id="tlf">
 						</td>
 					</tr>
 					<tr>
 						<td>Contraseña*:</td>
 						<td>
-							<input type="password" name="password" required>
+							<input type="password" name="pass" id="pass" required>
 						</td>
 						<td>Fecha de Nacimiento*:</td>
 						<td>
-							<input type="date" name="fecha" required>
+							<input type="date" name="fecha" id="fecha" required>
 						</td>
 					</tr>
 					<tr>
 						<td align="center">Género:*</td>
 						<td align="center">
-							M:<input type="radio" name="gen" value="Masculino">
-							F:<input type="radio" name="gen" value="Femenino">
-							O:<input type="radio" name="gen" value="Otro" checked>
+							M:<input type="radio" name="gen" id="gen" value="Masculino">
+							F:<input type="radio" name="gen" id="gen" value="Femenino">
+							O:<input type="radio" name="gen" id="gen" value="Otro" checked>
 						<td align="center">Nacionalidad:*</td>
 						<td>
-							<Select name="nacionalidad" required>
-								<option value=”v1”>Alemania</option>
-								<option value=”v2”>Argentina</option>
-								<option value=”v3”>Brasil</option>
-								<option value=”v4”>España</option>
-								<option value=”v5”>Estados Unidos</option>
-								<option value=”v6”>Francia</option>
-								<option value=”v7”>Holanda</option>
-								<option value=”v8”>Inglaterra</option>
-								<option value=”v9”>Italia</option>
-								<option value=”v10”>Portugal</option>
-								<option value=”v11”>Otro</option>
+							<Select name="nacionalidad" id="nacionalidad" required>
+								<option value=”Alemania”>Alemania</option>
+								<option value=”Argentina”>Argentina</option>
+								<option value=”Brasil”>Brasil</option>
+								<option value=”España”>España</option>
+								<option value=”EstadosUnidos”>Estados Unidos</option>
+								<option value=”Francia”>Francia</option>
+								<option value=”Holanda”>Holanda</option>
+								<option value=”Inglaterra”>Inglaterra</option>
+								<option value=”Italia”>Italia</option>
+								<option value=”Portugal”>Portugal</option>
+								<option value=”Otro”>Otro</option>
 						</td>
 					</tr>
 					<tr>
 						<td>Provincia*:</td>
 						<td>
-							<input type="text" name="prov" required>
+							<input type="text" name="prov" id="prov" required>
 						</td>
 						<td>Direccion*:</td>
 						<td>
-							<input type="text" name="dir" required>
+							<input type="text" name="dir" id="dir" required>
 						</td>
 					</tr>
 				</tbody>
 			</table><br>
-			<button type="button" value="Register" onclick="crearUsuario()">Registrate</button>
+			<button type="button" onclick="crearUsuario()">Registrate</button>
 			<input type="reset">
 		</form>
 	</b>

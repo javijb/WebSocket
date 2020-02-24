@@ -2,12 +2,70 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8">
-		<title>Catalogo</title>
+		<title>Búsqueda</title>
+		<script>
+            function myFunction() {
+                // Declare variables
+                var input, filter, ul, li, a, i, txtValue;
+                input = document.getElementById('myInput');
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("myUL");
+                li = ul.getElementsByTagName('li');
+
+                // Loop through all list items, and hide those who don't match the search query
+                for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+        </script>
+        <style>
+            
+            #myInput {
+                background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+                background-position: 10px 12px; /* Position the search icon */
+                background-repeat: no-repeat; /* Do not repeat the icon image */
+                width: 100%; /* Full-width */
+                font-size: 16px; /* Increase font-size */
+                padding: 12px 20px 12px 40px; /* Add some padding */
+                border: 1px solid #ddd; /* Add a grey border */
+                margin-bottom: 12px; /* Add some space below the input */
+            }
+
+            #myUL {
+            /* Remove default list styling */
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #myUL li a {
+                border: 1px solid #ddd; /* Add a border to all links */
+                margin-top: -1px; /* Prevent double borders */
+                margin-bottom: -20px;
+                background-color: #f6f6f6; /* Grey background color */
+                padding: 16px 640px 16px 640px; /* Add some padding */
+                text-decoration: none; /* Remove default text underline */
+                font-size: 18px; /* Increase the font-size */
+                color: black; /* Add a black text color */
+                display: block; /* Make it into a block element to fill the whole list */
+            }
+
+            #myUL li a:hover:not(.header) {
+                background-color: #eee; /* Add a hover effect to all links, except for headers */
+            }
+        </style>
+
 		<link href="../css/bg.css" type="text/css" rel="stylesheet"/>
 	</head>
 	<body>
 	<center>
-	<div>
+	
 		<div id="header">
 		<img src="../images/banner-adidas.jpg" width="1200" height="150">
 		<ul>
@@ -19,56 +77,35 @@
 		</ul>
 		</div>
 	</center>
-	<div class="row">
-		<div class="col-2" vertical-align="center">
-			<a href="home.html"><img src="../images/69524.png" width="65" height="65" hspace="10" /></a>
-			<a href="carrito.html"><img src="../images/107831.png" width="65" height="65" hspace="10"/></a>
-			<a href="busqueda.html"><img src="../images/14-512.png" width="65" height="65" hspace="15"/></a>
-  			<br><br>
-  			<a href="https://www.adidas.es/mujer"><img src="../images/womenadidas.jpg" width="290" height="340"/></a><br><br><br>
- 		</div>
+	
 		<center>
-		<div class="col-9">
-			<h2>Estos son los resultados de la busqueda de "Deportivas"...</h2>
-			<article class="box">
-				<img src="../productos/zap1.jpg" width="250" height="300"/>
-				<h1 class="product">Swift Run Orbrut</h1>
-				<p class="desc">Deportivas hombre Adidas Originals Noiess/Ftwbla.</p>
-				<h2 class="price">79.99 &#8364;</h2>
-				<form action="carrito.html">
-					<input class="comp" type="submit" value="Comprar"/>
-				</form>
-			</article>
-			<article class="box">
-				<img src="../productos/zap2.jpg" width="250" height="300"/>
-				<h1 class="product">Adidas Gazelle</h1>
-				<p class="desc">Adidas Originals Gazelle azul marino/Sneakers tenis.</p>
-				<h2 class="price">74.59 &#8364;</h2>
-				<form action="carrito.html">
-					<input class="comp" type="submit" value="Comprar"/>
-				</form>
-			</article>
-			<article class="box">
-				<img src="../productos/zap3.jpg" width="250" height="300"/>
-				<h1 class="product">Adidas AllStars</h1>
-				<p class="desc">Adidas AllStars son la ultima moda en zapatos de mujer.</p>
-				<h2 class="price">65.00 &#8364;</h2>
-				<form action="carrito.html">
-					<input class="comp" type="submit" value="Comprar"/>
-				</form>
-			</article>
-			<article class="box">
-				<img src="../productos/zap4.jpg" width="250" height="300"/>
-				<h1 class="product">Black W Gazelle</h1>
-				<p class="desc">Adidas Black Gazelle de cuerno para mujer.</p>
-				<h2 class="price">69.00 &#8364;</h2>
-				<form action="carrito.html">
-					<input class="comp" type="submit" value="Comprar"/>
-				</form>
-			</article>
-  		</div>
+		
+			<h2>Búsqueda:</h2>
+			 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+                <ul id="myUL">
+                    <li><a href="#">Adidas Original</a></li><br>
+                    <li><a href="#">Adidas Sport</a></li><br>
+                    
+                    <li><a href="#">Superstar</a></li><br>
+                    <li><a href="#">Stan Smith</a></li><br>
+                    <li><a href="#">Torsion</a></li><br>
+                    <li><a href="#">Gazelle</a></li><br>
+                    <li><a href="#">Ozweego</a></li><br>
+                    <li><a href="#">Continental</a></li><br>
+                    <li><a href="#">Falcón</a></li><br>
+                    <li><a href="#">Samba</a></li><br>
+                    
+                    <li><a href="#">Hoodies</a></li><br>
+                    <li><a href="#">Sudaderas</a></li><br>
+                    <li><a href="#">Pinwheel</a></li><br>
+                    <li><a href="#">Essential</a></li><br>
+                    <li><a href="#">Trefoil</a></li><br>
+                    <li><a href="#">PT3</a></li><br>
+                </ul> 
+  		
 		</center>
-	</div>
+	
 	<div class="footer">
   		<a href="https://www.instagram.com/adidas/?hl=es"><img src="../images/insta.png" width="25" height="25" hspace="10" /></a>
   		<a href="https://twitter.com/adidas_es?lang=es"><img src="../images/twitter.png" width="25" height="25" hspace="10" /></a>
