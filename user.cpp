@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QSqlError>
 #include "servidor.h"
-
+//Getters
 int User::getId(){ return m_id; }
 QString User::getNombre(){ return m_nombre; }
 QString User::getApellidos(){ return m_apellidos; }
@@ -17,7 +17,7 @@ QString User::getNac(){ return m_nac; }
 QString User::getProvincia(){ return m_provincia; }
 QString User::getDir(){ return m_dir; }
 
-
+//Setters
 void User::setNombre(QString nombre){
     m_nombre = nombre;
 }
@@ -57,7 +57,10 @@ void User::setProvincia(QString provincia){
 void User::setDir(QString direccion){
     m_dir = direccion;
 }
-
+/**
+ * @brief Creamos la función save y la query, que nos permite hacer la consulta y insertar los datos correspodientes en la tabla.
+ * @return
+ */
 bool User::save()
 {
 
@@ -101,14 +104,17 @@ bool User::save()
     }
 
 }
-
+/**
+ * @brief Cargamos el usuario y la contraseña para que la función de login se pueda utilizar.
+ * @param id
+ */
 void User::cargar(int id)
 {
 
     QSqlQuery query;   
 
-    query.prepare("SELECT * from user where id = :idusuario LIMIT 1");
-    query.bindValue(":idusuario", id);
+    query.prepare("SELECT * from public.user where email = :email LIMIT 1");
+    query.bindValue(":email", id);
     bool result {query.exec()};
     qDebug() << query.size();
 
@@ -122,7 +128,10 @@ void User::cargar(int id)
     }
 
 }
-
+/**
+ * @brief Permite borrar un usuario registrado.
+ * @param id
+ */
 void User::remove(int id)
 {
 

@@ -81,15 +81,15 @@ function crearUsuario()
 }
 
 //Cargar usuario
-function cargarUsuario(idUsuario)
+function cargarUsuario()
 {
     
     // 1) Crear JSON que se envia al servidor
     var email = document.getElementById("email").value;
-    var password = document.getElementById("pass").value;
+    var password = document.getElementById("password").value;
     var idMensaje = dameId();
-    var obj = {action:"cargarUsuario", id:idMensaje, email:email, password:pass};
-    socket.send(JSON.stringify(obj));
+    var Json = {action:"cargarUsuario", id:idMensaje, email:email, password:password};
+    socket.send(JSON.stringify(Json));
     
     /// 2) Crear el mensaje de respuesta que debe esperar el cliente y añadirlo a la lista de mensajes en espera
     mensaje = new mensajeEspera(idMensaje);

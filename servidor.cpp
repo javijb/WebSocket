@@ -3,11 +3,20 @@
 #include <QDebug>
 #include "user.h"
 
-
+/**
+ * @brief La función permite si en el caso de que servidor exista, devolver un mensaje json con el parámetro key.
+ * @param json
+ * @param key
+ * @return
+ */
 bool Servidor::exists(const JSON& json, const std::string& key)
 {
     return json.find(key) != json.end();
 }
+/**
+ * @brief Asigna un puerto al servidor
+ * @param puerto
+ */
 
 Servidor::Servidor(int puerto)
 {
@@ -15,6 +24,10 @@ Servidor::Servidor(int puerto)
     this->m_puerto = puerto;
 
 }
+/**
+ * @brief Creamos el servidor webSocket indicando los certificados, entonces lo iniciamos e indicamos los pasos 1, 2 y 3 comentados.
+ * @return
+ */
 
 int Servidor::startServidor()
 {
@@ -93,6 +106,12 @@ int Servidor::startServidor()
 
 }
 
+/**
+ * @brief Creamos la función userNuevo, que nos permite recibir el mensaje Json del html, llamar a la función save() del user.cpp y almacenar los datos seleccionados en la base de datos de la aplicación.
+ * @param webSocket
+ * @param received
+ */
+
 void userNuevo(ix::WebSocket *webSocket, JSON received){
 
     std::string nombre_user;
@@ -117,10 +136,10 @@ void userNuevo(ix::WebSocket *webSocket, JSON received){
     received["provincia"].get_to(prov_user);
     received["direccion"].get_to(dir_user);
 
-    qDebug() << QString::fromStdString(received["password"]);
-    qDebug() << QString::fromStdString(password_user);
+    //qDebug() << QString::fromStdString(received["password"]);
+    //qDebug() << QString::fromStdString(password_user);
 
-
+    //Usamos los setters del user.cpp y convertimos las variables a QString.
     User u;
     u.setNombre(QString::fromStdString(nombre_user));
     u.setApellidos(QString::fromStdString(apellidos_user));
@@ -134,7 +153,7 @@ void userNuevo(ix::WebSocket *webSocket, JSON received){
     u.setDir(QString::fromStdString(dir_user));
 
     u.save();
-
+    //Mensaje para confirmar que ha funcionado la creación del usuario.
     JSON jsonMessage = {
            {"action", "UsuarioCreado"},
            {"operationSuccess", true},
@@ -143,22 +162,21 @@ void userNuevo(ix::WebSocket *webSocket, JSON received){
     std::string messageToSend = jsonMessage.dump();
     webSocket->send(messageToSend);
 }
-
+/**
+ * @brief Creamos la función login, que nos permite coger un usuario ya creado (email y contraseña) y poder loggearse, en el caso de tener los datos incorrectos, no te permite loggearte.
+ * @param webSocket
+ * @param received
+ */
 void login(ix::WebSocket *webSocket, JSON received){
 
     bool log;
-    int id_user;
-    std::string email;
-    std::string password;
-
-    received["email"].get_to(email);
-    received["password"].get_to(password);
 
     ///consulta para buscar el usuario solicitado en la BBDD
     QSqlQuery query;
-    query.prepare("SELECT * FROM user WHERE email = :email");
-    query.bindValue(":email",  email.c_str());
-    query.exec();
+    query.prepare("SELECT email, password FROM public.user WHERE email = :email;");
+    query.bindValue(":email",  QString::fromStdString(received["email"]));
+    query.bindValue(":passwordl",  QString::fromStdString(received["password"]));
+    qDebug() << query.exec();
 
 
     JSON respuesta;
@@ -166,25 +184,12 @@ void login(ix::WebSocket *webSocket, JSON received){
 
     if (query.size() > 0){
 
-        QSqlQuery iquery;
-        iquery.prepare("SELECT ENCRYPT(:password, :email)");
-        iquery.bindValue(":password",  password.c_str());
-        if (query.next()){
-            id_user = query.value("idusuario").toInt();
-            respuesta["idusuario"] = query.value("idusuario").toString().toStdString();
-            qDebug() << "Existe el usuario, idusuario = " << id_user;
-            iquery.bindValue(":idusuario",  query.value("idusuario"));
-            iquery.exec();
-        }
+        qDebug() << query.value("password").toString();
+        QString password = query.value("password").toString();
+        qDebug() << query.value("password").toString();;
 
-        std::string encrypt;
+        if (password == QString::fromStdString(received["password"])) {
 
-        if (iquery.first()){
-            encrypt = iquery.value(0).toString().toStdString();
-        }
-
-
-        if (encrypt.compare(query.value("password").toString().toStdString()) == 0){
             respuesta["operationSuccess"] = "true";
             log = true;
         } else {
@@ -193,18 +198,23 @@ void login(ix::WebSocket *webSocket, JSON received){
         }
 
     } else {
-        qDebug() << "No se ha encontrado el usuario. Registrate por favor.";
+        qDebug() << "No se ha encontrado el email. Registrate por favor.";
         respuesta["operationSuccess"] = "false";
         respuesta["errorMessage"] = "No se ha encontrado el usuario. Registrate por favor.";
     }
 }
-
+/**
+ * @brief Llama las funciones cada vez que el servidor recibe un mensaje.
+ * @param webSocket
+ * @param mensaje
+ * @return
+ */
 JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const JSON &mensaje)
 {
 
     JSON resultado;
 
-    /// 1) Saber si es un JSON válido
+    /// 1) JSON válido
     if(mensaje.is_discarded())
     {
         std::cout << "Error, no es un JSON válido" << std::endl;
@@ -212,7 +222,7 @@ JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const 
     else
     {
 
-        /// 2) Saber si existe action en el JSON
+        /// 2) Saber si existe action
         if(exists(mensaje, "action"))
         {
 
@@ -225,14 +235,7 @@ JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const 
                 if(mensaje["action"] == "cargarUsuario")
                 {
 
-                    std::cout << "Cargar usuario" << std::endl;
-                    resultado["id"] = mensaje["id"];
-
-                    /*User usuario = User::cargar(mensaje["nombre"], mensaje["apellidos"],  mensaje["email"], mensaje["tlf"], mensaje["pass"], mensaje["fecha"], mensaje["gen"], mensaje["nacionalidad"], mensaje["prov"], mensaje["dir"]);
-                    JSON usuarioJSON = usuario.toJSON();
-                    resultado["resultado"][0] = usuarioJSON;
-
-                    return resultado;*/
+                    login(webSocket.get(), mensaje);
 
                 }
             }
