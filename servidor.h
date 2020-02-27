@@ -20,7 +20,7 @@ public:
 private:
     int m_puerto{9990};
     static bool exists(const JSON&, const std::string&);
-    JSON nuevoMensajeJSON(const JSON&);
+    JSON nuevoMensajeJSON(std::shared_ptr<ix::WebSocket>, const JSON&);
 
 };
 

@@ -1,8 +1,8 @@
 #ifndef USER_H
 #define USER_H
 
-#include <string>
-#include <list>
+#include <QString>
+#include <QVariant>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include "json.hpp"
@@ -13,35 +13,47 @@ class User
 {
 
 public:
-    User(std::string nombre, std::string apellidos, std::string email, std::string telefono, std::string password, std::string fecha_nac, std::string gen, std::string nac, std::string provincia,std::string dir);
     JSON toJSON();
-    void save();
-    static User load(std::string email, std::string password);
+    bool save();
+    void cargar(int id);
     static void remove(int id);
+
     int getId();
-    std::string getNombre();
-    std::string getApellidos();
-    std::string getEmail();
-    std::string getTelefono();
-    std::string getPassword();
-    std::string getFecha_nac();
-    std::string getGen();
-    std::string getNac();
-    std::string getProvincia();
-    std::string getDir();
+    QString getNombre();
+    QString getApellidos();
+    QString getEmail();
+    QString getTelefono();
+    QString getPassword();
+    QString getFecha_nac();
+    QString getGen();
+    QString getNac();
+    QString getProvincia();
+    QString getDir();
+
+    void setNombre(QString nombre);
+    void setApellidos(QString apellidos);
+    void setEmail(QString email);
+    void setTelefono(QString telefono);
+    void setPassword(QString password);
+    void setFecha_nac(QString fecha_nac);
+    void setGen(QString genero);
+    void setNac(QString nacionalidad);
+    void setProvincia(QString provincia);
+    void setDir(QString direccion);
+
 
 private:
     int m_id{0};
-    std::string m_nombre{""};
-    std::string m_apellidos{""};
-    std::string m_email{""};
-    std::string m_telefono{""};
-    std::string m_password{""};
-    std::string m_fecha_nac{""};
-    std::string m_gen{""};
-    std::string m_nac{""};
-    std::string m_provincia{""};
-    std::string m_dir{""};
+    QString m_nombre;
+    QString m_apellidos;
+    QString m_email;
+    QString m_telefono;
+    QString m_password;
+    QString m_fecha_nac;
+    QString m_gen;
+    QString m_nac;
+    QString m_provincia;
+    QString m_dir;
 
 };
 

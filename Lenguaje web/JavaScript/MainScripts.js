@@ -27,11 +27,6 @@ class Usuario {
 
 var usuario;
 
-function register()
-{   
-    document.getElementsByClassName("login")[0].style.display = "none"; 
-    document.getElementsByClassName("register")[0].style.display = "block"; 
-}
 
 //Crear usuario
 function crearUsuario()
@@ -53,7 +48,8 @@ function crearUsuario()
     
     // 2) Crear JSON que se envia al servidor
     var idMensaje = dameId();
-    var Json = {action:"crearUsuario", id:idMensaje, nombre:nombre, apellidos:apellidos , email:email, tlf:tlf, pass:pass, fecha:fecha, gen:gen, nacionalidad:nacionalidad, prov:prov, dir:dir};
+    //insert
+    var Json = {action:"crearUsuario", id: idMensaje, nombre: nombre, apellidos: apellidos , email: email, telefono: tlf, password: pass, fecha_nac: fecha, genero: gen, nacionalidad: nacionalidad, provincia: prov, direccion: dir};
     socket.send(JSON.stringify(Json));
     
     // 3) Crear el mensaje de respuesta que debe esperar el cliente y añadirlo a la lista de mensajes en espera
@@ -66,7 +62,7 @@ function crearUsuario()
         
         function usuarioNuevo(item, index)
         {
-            usuario = new Usuario(item.id, item.nombre, item.apellidos, item.email, item.tlf, item.pass, item.fecha, item.gen, item.nacionalidad, item.prov, item.dir);
+            usuario = new Usuario(item.id, item.nombre, item.apellidos, item.email, item.telefono, item.password, item.fecha_nac, item.genero, item.nacionalidad, item.provincia, item.direccion);
             
             if(usuario.id == 0)
             {
@@ -92,7 +88,7 @@ function cargarUsuario(idUsuario)
     var email = document.getElementById("email").value;
     var password = document.getElementById("pass").value;
     var idMensaje = dameId();
-    var obj = {action:"cargarUsuario", id:idMensaje, email:email, pass:password};
+    var obj = {action:"cargarUsuario", id:idMensaje, email:email, password:pass};
     socket.send(JSON.stringify(obj));
     
     /// 2) Crear el mensaje de respuesta que debe esperar el cliente y añadirlo a la lista de mensajes en espera
@@ -105,7 +101,7 @@ function cargarUsuario(idUsuario)
         
         function usuarios(item, index)
         {
-            usuario = new Usuario(item.id, item.nombre, item.apellidos, item.email, item.tlf, item.pass, item.fecha, item.gen, item.nacionalidad, item.prov, item.dir);
+            usuario = new Usuario(item.id, item.nombre, item.apellidos, item.email, item.tlf, item.password, item.fecha_nac, item.genero, item.nacionalidad, item.provincia, item.direccion);
             
             if(usuario.id == 0)
             {

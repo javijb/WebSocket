@@ -60,7 +60,7 @@ int Servidor::startServidor()
                     JSON receivedObject = JSON::parse(msg->str, nullptr, false);
 
                     /// 2) Trabajar con el mensaje JSON
-                    JSON respuesta = this->nuevoMensajeJSON(receivedObject);
+                    JSON respuesta = this->nuevoMensajeJSON(webSocket, receivedObject);
 
                     /// 3) Enviar respuesta al cliente
                     std::string respuestaCliente = respuesta.dump();
@@ -93,7 +93,113 @@ int Servidor::startServidor()
 
 }
 
-JSON Servidor::nuevoMensajeJSON(const JSON &mensaje)
+void userNuevo(ix::WebSocket *webSocket, JSON received){
+
+    std::string nombre_user;
+    std::string apellidos_user;
+    std::string email_user;
+    std::string telefono_user;
+    std::string password_user;
+    std::string fecha_user;
+    std::string genero_user;
+    std::string nacio_user;
+    std::string prov_user;
+    std::string dir_user;
+
+    received["nombre"].get_to(nombre_user);
+    received["apellidos"].get_to(apellidos_user);
+    received["email"].get_to(email_user);
+    received["telefono"].get_to(telefono_user);
+    received["password"].get_to(password_user);
+    received["fecha_nac"].get_to(fecha_user);
+    received["genero"].get_to(genero_user);
+    received["nacionalidad"].get_to(nacio_user);
+    received["provincia"].get_to(prov_user);
+    received["direccion"].get_to(dir_user);
+
+    qDebug() << QString::fromStdString(received["password"]);
+    qDebug() << QString::fromStdString(password_user);
+
+
+    User u;
+    u.setNombre(QString::fromStdString(nombre_user));
+    u.setApellidos(QString::fromStdString(apellidos_user));
+    u.setEmail(QString::fromStdString(email_user));
+    u.setTelefono(QString::fromStdString(telefono_user));
+    u.setPassword(QString::fromStdString(password_user));
+    u.setFecha_nac(QString::fromStdString(fecha_user));
+    u.setGen(QString::fromStdString(genero_user));
+    u.setNac(QString::fromStdString(nacio_user));
+    u.setProvincia(QString::fromStdString(prov_user));
+    u.setDir(QString::fromStdString(dir_user));
+
+    u.save();
+
+    JSON jsonMessage = {
+           {"action", "UsuarioCreado"},
+           {"operationSuccess", true},
+    };
+
+    std::string messageToSend = jsonMessage.dump();
+    webSocket->send(messageToSend);
+}
+
+void login(ix::WebSocket *webSocket, JSON received){
+
+    bool log;
+    int id_user;
+    std::string email;
+    std::string password;
+
+    received["email"].get_to(email);
+    received["password"].get_to(password);
+
+    ///consulta para buscar el usuario solicitado en la BBDD
+    QSqlQuery query;
+    query.prepare("SELECT * FROM user WHERE email = :email");
+    query.bindValue(":email",  email.c_str());
+    query.exec();
+
+
+    JSON respuesta;
+    respuesta["type"] = "login";
+
+    if (query.size() > 0){
+
+        QSqlQuery iquery;
+        iquery.prepare("SELECT ENCRYPT(:password, :email)");
+        iquery.bindValue(":password",  password.c_str());
+        if (query.next()){
+            id_user = query.value("idusuario").toInt();
+            respuesta["idusuario"] = query.value("idusuario").toString().toStdString();
+            qDebug() << "Existe el usuario, idusuario = " << id_user;
+            iquery.bindValue(":idusuario",  query.value("idusuario"));
+            iquery.exec();
+        }
+
+        std::string encrypt;
+
+        if (iquery.first()){
+            encrypt = iquery.value(0).toString().toStdString();
+        }
+
+
+        if (encrypt.compare(query.value("password").toString().toStdString()) == 0){
+            respuesta["operationSuccess"] = "true";
+            log = true;
+        } else {
+            respuesta["operationSuccess"] = "false";
+            respuesta["errorMessage"] = "La contraseña es incorrecta.";
+        }
+
+    } else {
+        qDebug() << "No se ha encontrado el usuario. Registrate por favor.";
+        respuesta["operationSuccess"] = "false";
+        respuesta["errorMessage"] = "No se ha encontrado el usuario. Registrate por favor.";
+    }
+}
+
+JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const JSON &mensaje)
 {
 
     JSON resultado;
@@ -113,28 +219,7 @@ JSON Servidor::nuevoMensajeJSON(const JSON &mensaje)
                 if(mensaje["action"] == "crearUsuario")
                 {
 
-                    std::cout << "Crear usuario" << std::endl;
-                    resultado["id"] = mensaje["id"];
-
-                    std::string nombre = mensaje["nombre"];
-                    std::string apellidos = mensaje["apellidos"];
-                    std::string email = mensaje["email"];
-                    std::string pass = mensaje["pass"];
-                    std::string telefono = mensaje["tlf"];
-                    std::string fecha_nac = mensaje["fecha"];
-                    std::string genero = mensaje["gen"];
-                    std::string nacionalidad = mensaje["nacionalidad"];
-                    std::string provincia = mensaje["prov"];
-                    std::string dir = mensaje["dir"];
-
-                    User user(nombre, apellidos, email, telefono, pass, fecha_nac, genero, nacionalidad, provincia, dir);
-                    user.save();
-
-                    /*JSON usuarioJSON = user.toJSON();
-                    resultado["resultado"][0] = usuarioJSON;
-
-                    return resultado;*/
-
+                    userNuevo(webSocket.get(), mensaje);
                 }
 
                 if(mensaje["action"] == "cargarUsuario")
@@ -143,11 +228,11 @@ JSON Servidor::nuevoMensajeJSON(const JSON &mensaje)
                     std::cout << "Cargar usuario" << std::endl;
                     resultado["id"] = mensaje["id"];
 
-                    User usuario = User::load(mensaje["email"], mensaje["pass"]);
+                    /*User usuario = User::cargar(mensaje["nombre"], mensaje["apellidos"],  mensaje["email"], mensaje["tlf"], mensaje["pass"], mensaje["fecha"], mensaje["gen"], mensaje["nacionalidad"], mensaje["prov"], mensaje["dir"]);
                     JSON usuarioJSON = usuario.toJSON();
                     resultado["resultado"][0] = usuarioJSON;
 
-                    return resultado;
+                    return resultado;*/
 
                 }
             }
