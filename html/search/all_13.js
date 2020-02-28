@@ -4,5 +4,6 @@ var searchData=
   ['uninitialized',['uninitialized',['../classnlohmann_1_1detail_1_1lexer.html#a3f313cdbe187cababfc5e06f0b69b098a42dd1a73d072bb6bf3f494f22b15db8e',1,'nlohmann::detail::lexer']]],
   ['update',['update',['../classnlohmann_1_1basic__json.html#a1cfa9ae5e7c2434cab4cfe69bffffe11',1,'nlohmann::basic_json::update(const_reference j)'],['../classnlohmann_1_1basic__json.html#a27921dafadb3bbefd180235ec763e3ea',1,'nlohmann::basic_json::update(const_iterator first, const_iterator last)']]],
   ['user',['User',['../classUser.html',1,'']]],
-  ['user_2ecpp',['user.cpp',['../user_8cpp.html',1,'']]]
+  ['user_2ecpp',['user.cpp',['../user_8cpp.html',1,'']]],
+  ['usernuevo',['userNuevo',['../servidor_8cpp.html#ad6ec5d0ede794dcfd174a2f699679f40',1,'servidor.cpp']]]
 ];

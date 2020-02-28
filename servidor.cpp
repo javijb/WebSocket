@@ -4,6 +4,16 @@
 #include "user.h"
 #include <QSqlRecord>
 
+/*! \file */
+
+/*! \mainpage Documentación del eMarket de Adidas
+ * Adidas eMarket es una tienda online en la que se venden productos de la marca.
+ *
+ * Esta aplicación aún se encuentra en fase de desarrollo. Versión: 0.5
+ *
+ * */
+
+
 /**
  * @brief La función permite si en el caso de que servidor exista, devolver un mensaje json con el parámetro key.
  * @param json

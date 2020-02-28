@@ -9,6 +9,8 @@
 #include "servidor.h"
 #include "conexion.h"
 
+/*! \file */
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);

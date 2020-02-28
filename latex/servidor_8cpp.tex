@@ -1,0 +1,51 @@
+\hypertarget{servidor_8cpp}{}\section{servidor.\+cpp File Reference}
+\label{servidor_8cpp}\index{servidor.\+cpp@{servidor.\+cpp}}
+{\ttfamily \#include \char`\"{}servidor.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}/home/usuario/\+I\+X\+Web\+Socket-\/master/ixwebsocket/\+I\+X\+Socket\+T\+L\+S\+Options.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Q\+Debug$>$}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Q\+Sql\+Record$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{servidor_8cpp_ad6ec5d0ede794dcfd174a2f699679f40}{user\+Nuevo}} (ix\+::\+Web\+Socket $\ast$web\+Socket, \mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}} received)
+\begin{DoxyCompactList}\small\item\em Creamos la función user\+Nuevo, que nos permite recibir el mensaje Json del html, llamar a la función save() del \mbox{\hyperlink{user_8cpp}{user.\+cpp}} y almacenar los datos seleccionados en la base de datos de la aplicación. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{servidor_8cpp_aa0de743810546ed0f66ae69e19b7996c}{login}} (ix\+::\+Web\+Socket $\ast$web\+Socket, \mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}} received)
+\begin{DoxyCompactList}\small\item\em Creamos la función login, que nos permite coger un usuario ya creado (email y contraseña) y poder loggearse, en el caso de tener los datos incorrectos, no te permite loggearte. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{servidor_8cpp_aa0de743810546ed0f66ae69e19b7996c}\label{servidor_8cpp_aa0de743810546ed0f66ae69e19b7996c}} 
+\index{servidor.\+cpp@{servidor.\+cpp}!login@{login}}
+\index{login@{login}!servidor.\+cpp@{servidor.\+cpp}}
+\subsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily void login (\begin{DoxyParamCaption}\item[{ix\+::\+Web\+Socket $\ast$}]{web\+Socket,  }\item[{\mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}}}]{received }\end{DoxyParamCaption})}
+
+
+
+Creamos la función login, que nos permite coger un usuario ya creado (email y contraseña) y poder loggearse, en el caso de tener los datos incorrectos, no te permite loggearte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em web\+Socket} & \\
+\hline
+{\em received} & \\
+\hline
+\end{DoxyParams}
+consulta para buscar el usuario solicitado en la B\+B\+DD \mbox{\Hypertarget{servidor_8cpp_ad6ec5d0ede794dcfd174a2f699679f40}\label{servidor_8cpp_ad6ec5d0ede794dcfd174a2f699679f40}} 
+\index{servidor.\+cpp@{servidor.\+cpp}!user\+Nuevo@{user\+Nuevo}}
+\index{user\+Nuevo@{user\+Nuevo}!servidor.\+cpp@{servidor.\+cpp}}
+\subsubsection{\texorpdfstring{user\+Nuevo()}{userNuevo()}}
+{\footnotesize\ttfamily void user\+Nuevo (\begin{DoxyParamCaption}\item[{ix\+::\+Web\+Socket $\ast$}]{web\+Socket,  }\item[{\mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}}}]{received }\end{DoxyParamCaption})}
+
+
+
+Creamos la función user\+Nuevo, que nos permite recibir el mensaje Json del html, llamar a la función save() del \mbox{\hyperlink{user_8cpp}{user.\+cpp}} y almacenar los datos seleccionados en la base de datos de la aplicación. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em web\+Socket} & \\
+\hline
+{\em received} & \\
+\hline
+\end{DoxyParams}
