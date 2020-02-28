@@ -2,6 +2,7 @@
 #include "/home/usuario/IXWebSocket-master/ixwebsocket/IXSocketTLSOptions.h"
 #include <QDebug>
 #include "user.h"
+#include <QSqlRecord>
 
 /**
  * @brief La función permite si en el caso de que servidor exista, devolver un mensaje json con el parámetro key.
@@ -34,14 +35,15 @@ int Servidor::startServidor()
 
     //Crea un servidor
     ix::WebSocketServer server(this->m_puerto, "0.0.0.0");
+    ix::SocketTLSOptions tlsOptions;
+    tlsOptions.tls=true;
+    tlsOptions.certFile = "./cert/localhost.crt";
+    tlsOptions.keyFile = "./cert/localhost.key";
+    tlsOptions.caFile = "NONE";
 
-    ix::SocketTLSOptions webSocketTLS;
-    webSocketTLS.keyFile = "/etc/ssl/private/serverTLS/serverTLS.key";
-    webSocketTLS.certFile = "/etc/ssl/private/serverTLS/serverTLS.crt";
-    webSocketTLS.caFile = "/root/ca/myCA.pem";
-    std::cout << webSocketTLS.getErrorMsg() << std::endl;
-    qDebug() << webSocketTLS.isValid();
-    server.setTLSOptions(webSocketTLS);
+    if (tlsOptions.isValid()) {
+        std::cerr << "SSL valid" << std::endl;
+    }
 
     server.setOnConnectionCallback(
                 [this](std::shared_ptr<ix::WebSocket> webSocket,
@@ -173,36 +175,47 @@ void login(ix::WebSocket *webSocket, JSON received){
 
     ///consulta para buscar el usuario solicitado en la BBDD
     QSqlQuery query;
-    query.prepare("SELECT email, password FROM public.user WHERE email = :email;");
+    query.prepare("SELECT email, password FROM public.user WHERE email = :email");
     query.bindValue(":email",  QString::fromStdString(received["email"]));
-    query.bindValue(":passwordl",  QString::fromStdString(received["password"]));
-    qDebug() << query.exec();
+    query.bindValue(":password",  QString::fromStdString(received["password"]));
 
+    if (query.exec() == true) {
+            query.next();
+            JSON respuesta;
+            respuesta["type"] = "login";
 
-    JSON respuesta;
-    respuesta["type"] = "login";
+            if (query.value("password") != ""){
 
-    if (query.size() > 0){
+                QString password = query.value("password").toString();
 
-        qDebug() << query.value("password").toString();
-        QString password = query.value("password").toString();
-        qDebug() << query.value("password").toString();;
+                if (password == QString::fromStdString(received["password"])) {
 
-        if (password == QString::fromStdString(received["password"])) {
+                    respuesta["operationSuccess"] = "true";
+                    log = true;
+                    qDebug() << log;
+                } else {
 
-            respuesta["operationSuccess"] = "true";
-            log = true;
-        } else {
-            respuesta["operationSuccess"] = "false";
-            respuesta["errorMessage"] = "La contraseña es incorrecta.";
-        }
+                    qDebug() << "La contraseña es incorrecta.";
 
-    } else {
+                }
+
+            }
+    }
+
+     else {
         qDebug() << "No se ha encontrado el email. Registrate por favor.";
-        respuesta["operationSuccess"] = "false";
-        respuesta["errorMessage"] = "No se ha encontrado el usuario. Registrate por favor.";
     }
 }
+
+/*void compraCarrito(ix::WebSocket *webSocket, JSON received){
+
+    bool compraRealizada;
+
+    QSqlQuery query;
+    query.prepare("Select * from compras where  ");
+}*/
+
+
 /**
  * @brief Llama las funciones cada vez que el servidor recibe un mensaje.
  * @param webSocket

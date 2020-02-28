@@ -118,6 +118,45 @@ function cargarUsuario()
     
 }
 
+function compraCarrito()
+{
+    // 1) Crear JSON que se envia al servidor
+    var producto1 = document.getElementById("nom1").value;
+    var precio1 = document.getElementById("p1").value;
+    var producto2 = document.getElementById("nom2").value;
+    var precio2 = document.getElementById("p2").value;
+    var producto3 = document.getElementById("p3").value;
+    var precio3 = document.getElementById("p3").value;
+    var idMensaje = dameId();
+    var Json = {action:"compraCarrito", id:idMensaje, prod1:producto1, pre1:precio1, prod2:producto2, pre2:precio2, prod3:producto3, pre3:precio3 };
+    socket.send(JSON.stringify(Json));
+    
+    /// 2) Crear el mensaje de respuesta que debe esperar el cliente y añadirlo a la lista de mensajes en espera
+    mensaje = new mensajeEspera(idMensaje);
+    
+    mensaje.funcionEjecutar = function(resultado)
+    {
+        
+        resultado.forEach(compras);
+        
+        function compras(item, index)
+        {
+            compra = new Compra(item.id, item.prod1, item.pre1, item.prod2, item.pre2, item.prod3, item.pre3);
+            
+            if(compra.id == 0)
+            {
+                document.getElementById("errorLogin").style.display = "flex";
+            }
+            else
+            {
+                document.getElementsByClassName("login")[0].style.display = "none";
+            }
+        }
+        
+    }
+    mensajesEsperandoRespuesta.push(mensaje); 
+}
+
 //Mensajes JSON
 function mensajeEspera(id)
 {

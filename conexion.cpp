@@ -5,6 +5,11 @@
 #include <QDebug>
 #include <QString>
 
+/*! \file */
+
+/**
+ * @brief Constructor conexion
+ */
 Conexion::Conexion()
 {
 

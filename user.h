@@ -14,11 +14,12 @@ class User
 
 public:
     JSON toJSON();
-    bool save();
+    bool save();  /*! <Funcion guardar conecta bbdd*/
     void cargar(int id);
     static void remove(int id);
-
     int getId();
+
+
     QString getNombre();
     QString getApellidos();
     QString getEmail();
