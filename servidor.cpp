@@ -215,6 +215,13 @@ void login(ix::WebSocket *webSocket, JSON received){
      else {
         qDebug() << "No se ha encontrado el email. Registrate por favor.";
     }
+    JSON jsonMessage = {
+           {"action", "OperacionLogin"},
+           {"operationSuccess", true},
+    };
+
+    std::string messageToSend = jsonMessage.dump();
+    webSocket->send(messageToSend);
 }
 
 /*void compraCarrito(ix::WebSocket *webSocket, JSON received){
@@ -222,7 +229,36 @@ void login(ix::WebSocket *webSocket, JSON received){
     bool compraRealizada;
 
     QSqlQuery query;
-    query.prepare("Select * from compras where  ");
+    query.prepare("Select nombre, precio from productos where nombre = :nombre and precio = :precio");
+    query.bindValue(":nombre",  QString::fromStdString(received["producto1"]));
+    query.bindValue(":precio",  QString::fromStdString(received["precio1"]));
+    query.bindValue(":nombre",  QString::fromStdString(received["producto2"]));
+    query.bindValue(":precio",  QString::fromStdString(received["precio2"]));
+    query.bindValue(":nombre",  QString::fromStdString(received["producto3"]));
+    query.bindValue(":precio",  QString::fromStdString(received["precio3"]));
+
+    if (query.exec() == true)
+    {
+        query.next();
+            JSON respuesta;
+            respuesta["type"] = "compraRealizada";
+            qDebug() << "Tu compra se ha realizado con éxito.";
+            compraRealizada = true;
+    } else {
+
+        qDebug() << "Se ha producido un error en su compra.";
+        compraRealizada = false;
+
+    }
+
+    JSON jsonMessage = {
+           {"action", "compraRealizada"},
+           {"operationSuccess", true},
+    };
+
+    std::string messageToSend = jsonMessage.dump();
+    webSocket->send(messageToSend);
+
 }*/
 
 
@@ -259,6 +295,13 @@ JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const 
                 {
 
                     login(webSocket.get(), mensaje);
+
+                }
+
+                if(mensaje["action"] == "compraCarrito")
+                {
+
+                    //compraCarrito(webSocket.get(), mensaje);
 
                 }
             }

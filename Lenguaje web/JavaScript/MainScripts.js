@@ -141,7 +141,7 @@ function compraCarrito()
         
         function compras(item, index)
         {
-            compra = new Compra(item.id, item.prod1, item.pre1, item.prod2, item.pre2, item.prod3, item.pre3);
+            compra = new Compra(item.id, item.producto1, item.precio1, item.producto2, item.precio2, item.producto3, item.precio3);
             
             if(compra.id == 0)
             {
