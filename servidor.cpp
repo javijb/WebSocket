@@ -1,5 +1,5 @@
 #include "servidor.h"
-#include "/home/usuario/IXWebSocket-master/ixwebsocket/IXSocketTLSOptions.h"
+#include "IXWebSocket-master/ixwebsocket/IXSocketTLSOptions.h"
 #include <QDebug>
 #include "user.h"
 #include <QSqlRecord>

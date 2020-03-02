@@ -2,9 +2,9 @@
 #define SERVIDOR_H
 
 #include<iostream>
-#include "/home/usuario/IXWebSocket-master/ixwebsocket/IXWebSocketServer.h"
-#include "/home/usuario/IXWebSocket-master/ixwebsocket/IXWebSocket.h"
-#include "/home/usuario/IXWebSocket-master/ixwebsocket/IXConnectionState.h"
+#include "IXWebSocket-master/ixwebsocket/IXWebSocketServer.h"
+#include "IXWebSocket-master/ixwebsocket/IXWebSocket.h"
+#include "IXWebSocket-master/ixwebsocket/IXConnectionState.h"
 #include "json.hpp"
 
 
