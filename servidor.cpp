@@ -45,7 +45,7 @@ int Servidor::startServidor()
 
     //Crea un servidor
     ix::WebSocketServer server(this->m_puerto, "0.0.0.0");
-    ix::SocketTLSOptions tlsOptions;
+    /*ix::SocketTLSOptions tlsOptions;
     tlsOptions.tls=true;
     tlsOptions.certFile = "./cert/localhost.crt";
     tlsOptions.keyFile = "./cert/localhost.key";
@@ -53,7 +53,7 @@ int Servidor::startServidor()
 
     if (tlsOptions.isValid()) {
         std::cerr << "SSL valid" << std::endl;
-    }
+    }*/
 
     server.setOnConnectionCallback(
                 [this](std::shared_ptr<ix::WebSocket> webSocket,
