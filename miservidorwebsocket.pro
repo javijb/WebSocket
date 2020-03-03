@@ -48,9 +48,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../websocket/lib/release/ -lixwebsocket
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../websocket/lib/debug/ -lixwebsocket
-else:unix: LIBS += -L$$PWD/../../websocket/lib/ -lixwebsocket
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/websocket/lib/release/ -lixwebsocket
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/websocket/lib/debug/ -lixwebsocket
+else:unix: LIBS += -L$$PWD/websocket/lib/ -lixwebsocket
 
 
 
@@ -58,8 +58,8 @@ win32:CONFIG(release, debug|release): LIBS += -L$$PWD/IXWebSocket-master/build/r
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/IXWebSocket-master/build/debug/ -lixwebsocket
 else:unix: LIBS += -L$$PWD/IXWebSocket-master/build/ -lixwebsocket
 
-INCLUDEPATH += $$PWD/../IXWebSocket-master/build
-DEPENDPATH += $$PWD/../IXWebSocket-master/build
+INCLUDEPATH += $$PWD/IXWebSocket-master/build
+DEPENDPATH += $$PWD/IXWebSocket-master/build
 
 win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/IXWebSocket-master/build/release/libixwebsocket.a
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/IXWebSocket-master/build/debug/libixwebsocket.a

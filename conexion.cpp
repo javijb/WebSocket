@@ -78,7 +78,7 @@ void Conexion::loadProperties()
     m_databaseName = QString::fromUtf8(m_propiedades["databaseName"].c_str());
     m_port = std::stoi(m_propiedades["port"]);
     m_userName = QString::fromUtf8(m_propiedades["username"].c_str());;
-    m_password = QString::fromUtf8(m_propiedades["paswword"].c_str());;
+    m_password = QString::fromUtf8(m_propiedades["password"].c_str());;
 
 }
 
