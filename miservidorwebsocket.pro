@@ -41,7 +41,7 @@ HEADERS += \
 FORMS +=
 
 
-LIBS += -pthread -lz
+LIBS += -pthread -lz -lssl -lcrypto
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -61,8 +61,3 @@ else:unix: LIBS += -L$$PWD/IXWebSocket-master/build/ -lixwebsocket
 INCLUDEPATH += $$PWD/IXWebSocket-master/build
 DEPENDPATH += $$PWD/IXWebSocket-master/build
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/IXWebSocket-master/build/release/libixwebsocket.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/IXWebSocket-master/build/debug/libixwebsocket.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/IXWebSocket-master/build/release/ixwebsocket.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/IXWebSocket-master/build/debug/ixwebsocket.lib
-else:unix: PRE_TARGETDEPS += $$PWD/IXWebSocket-master/build/libixwebsocket.a

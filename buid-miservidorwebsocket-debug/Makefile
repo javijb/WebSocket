@@ -38,7 +38,7 @@ DISTNAME      = miservidorwebsocket1.0.0
 DISTDIR = /home/usuario/miservidorwebsocket/buid-miservidorwebsocket-debug/.tmp/miservidorwebsocket1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -pthread -lz -L/home/usuario/miservidorwebsocket/websocket/lib/ -L/home/usuario/miservidorwebsocket/IXWebSocket-master/build/ -lixwebsocket -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Sql -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -pthread -lz -lssl -lcrypto -L/home/usuario/miservidorwebsocket/websocket/lib/ -L/home/usuario/miservidorwebsocket/IXWebSocket-master/build/ -lixwebsocket -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Sql -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -250,7 +250,7 @@ TARGET        = miservidorwebsocket
 first: all
 ####### Build rules
 
-$(TARGET): /home/usuario/miservidorwebsocket/IXWebSocket-master/build/libixwebsocket.a $(OBJECTS)  
+$(TARGET):  $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../miservidorwebsocket.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mkspecs/features/spec_pre.prf \

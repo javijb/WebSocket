@@ -15,6 +15,8 @@ La principal plataforma para la que estaría disponible esta aplicación sería 
 
 - Aplicaiones y herramientas: QT, PHP, librerías websocket y git.
 
+- Database name: AdidasWeb
+
 
 **Funcionamiento de la aplicación**
 
@@ -22,7 +24,7 @@ IMPORTANTE (Es necesario tener implementadas las librerías de IXWebsocket.)
 
 1-. El cliente deberá abrir su navegador y con ello, la aplicación. 
 
-2-. Entonces podrá ver una interfaz de usuario con un menú, en el cual verá la opción de login/register, y deberá entrar allí.
+2-. Entonces podrá ver una interfaz de usuario con un menú, en el cual verá la opción de login/register, y deberá entrar allí. (Usuario de prueba: email: javierjaume@estudiante.edib.es password: holahola1)
 
 3-. Ya en el formulario puedes o loggearte en el caso de que ya tengas un usuario, o registrarte. (Es imprescindible tener un usuario para realizar una compra en la tienda.)
 
@@ -68,7 +70,7 @@ IMPORTANTE (Es necesario tener implementadas las librerías de IXWebsocket.)
 **COPYRIGHT**
 
     eMarket Adidas. Version 0.5.
-    Copyright (C) 2020  Javier Jaume Belda y Javier Miró.
+    Copyright (C) 2020  Javier Jaume Belda.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
