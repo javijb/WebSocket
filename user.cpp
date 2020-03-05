@@ -185,11 +185,10 @@ bool User::save()
 
     bool result {query.exec()};
 
-    qDebug() << query.lastQuery();
-
     qDebug() << result;
-    qDebug() << query.lastError();
+    qDebug() << "El usuario se ha creado con éxito.";
 
+    qDebug() << query.lastError().text();
 
     QString error (query.lastError().text());
 

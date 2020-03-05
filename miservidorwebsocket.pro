@@ -41,7 +41,7 @@ HEADERS += \
 FORMS +=
 
 
-LIBS += -pthread -lz -lssl -lcrypto
+LIBS += -pthread -lz
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

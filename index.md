@@ -4,16 +4,16 @@
 
 **Presentación de la aplicación:**
 
-Es una aplicación diseñada para simular un el concepto de eMarket de Adidas (mercado online), en el cual un usuario puede registrarse en la página y a partir de allí comprar los artículos que se encuentran en la tienda.
-Es una aplicación que se basa en el envió y recibo de información mediante mensajes JSON. Estos mensajes se envían desde la página html al servidor websocket y al revés. La aplicación también esta compuesta por una base de datos PHP.
-La principal plataforma para la que estaría disponible esta aplicación sería para PC hasta que llegará su adaptación a Android e IOS.
+Es una aplicación diseñada para simular el concepto de eMarket de Adidas (mercado online), en el cual un usuario puede registrarse en la página y a partir de ahí comprar los artículos que se encuentran en la tienda.
+Es una aplicación que se basa en el envio y recibo de información mediante mensajes JSON. Estos mensajes se envían desde la página html al servidor websocket y al revés. La aplicación también esta compuesta por una base de datos Postgres.
+La principal plataforma para la que estaría disponible esta aplicación sería para PC hasta que llegará su adaptación a Android e iOS.
 
 
 **Herramientas utilizadas para el proyecto:**
 
 - Lenguajes de programación: HTML, JavaScript, CSS y C++.
 
-- Aplicaiones y herramientas: QT, PHP, librerías websocket y git.
+- Aplicaciones y herramientas: QT, Postgres, librerías websocket y git.
 
 - Database name: AdidasWeb
 
@@ -24,7 +24,7 @@ IMPORTANTE (Es necesario tener implementadas las librerías de IXWebsocket.)
 
 1-. El cliente deberá abrir su navegador y con ello, la aplicación. 
 
-2-. Entonces podrá ver una interfaz de usuario con un menú, en el cual verá la opción de login/register, y deberá entrar allí. (Usuario de prueba: email: javierjaume@estudiante.edib.es password: holahola1)
+2-. Entonces podrá ver una interfaz de usuario con un menú, en el cual verá la opción de login/register, y deberá entrar allí. (Usuario de prueba: email: usuario@user.com password: user)
 
 3-. Ya en el formulario puedes o loggearte en el caso de que ya tengas un usuario, o registrarte. (Es imprescindible tener un usuario para realizar una compra en la tienda.)
 

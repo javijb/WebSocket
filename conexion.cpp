@@ -39,7 +39,7 @@ void Conexion::processLine(std::string line)
 void Conexion::readFile()
 {
 
-    QString nombreArchivo = "/home/usuario/miservidorwebsocket/basedatos/bbdd.conf";
+    QString nombreArchivo = "../basedatos/bbdd.conf";
 
     if(QFile::exists(nombreArchivo) ){
 
