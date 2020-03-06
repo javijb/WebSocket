@@ -16,7 +16,7 @@ public:
     JSON toJSON();
     bool save();  /*! <Funcion guardar conecta bbdd*/
     void cargar(int id);
-    static void remove(int id);
+    static void borrar(int id);
     int getId();
 
 

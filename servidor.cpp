@@ -118,6 +118,9 @@ int Servidor::startServidor()
 
 }
 
+bool g_log;
+int g_id;
+
 /**
  * @brief Creamos la función userNuevo, que nos permite recibir el mensaje Json del html, llamar a la función save() del user.cpp y almacenar los datos seleccionados en la base de datos de la aplicación.
  * @param webSocket
@@ -174,6 +177,22 @@ void userNuevo(ix::WebSocket *webSocket, JSON received){
     std::string messageToSend = jsonMessage.dump();
     webSocket->send(messageToSend);
 }
+
+void usercheck(ix::WebSocket *webSocket){
+    JSON r;
+    r["type"] = "usercheck";
+    if (g_log == true) {
+        r["operation"] = "true";
+        r["id_user"] = g_id;
+    } else {
+        r["operation"] = "false";
+    }
+
+    std::string messageToSend = r.dump();
+    webSocket->send(messageToSend);
+}
+
+
 /**
  * @brief Creamos la función login, que nos permite coger un usuario ya creado (email y contraseña) y poder loggearse, en el caso de tener los datos incorrectos, no te permite loggearte.
  * @param webSocket
@@ -182,17 +201,16 @@ void userNuevo(ix::WebSocket *webSocket, JSON received){
 void login(ix::WebSocket *webSocket, JSON received){
 
     bool log;
-
+    JSON respuesta;
     ///consulta para buscar el usuario solicitado en la BBDD
     QSqlQuery query;
-    query.prepare("SELECT email, password FROM public.user WHERE email = :email");
+    query.prepare("SELECT nombre, apellidos, email, password FROM public.user WHERE email = :email");
     query.bindValue(":email",  QString::fromStdString(received["email"]));
     query.bindValue(":password",  QString::fromStdString(received["password"]));
 
     if (query.exec() == true) {
             query.next();
-            JSON respuesta;
-            respuesta["type"] = "login";
+            respuesta["action"] = "Login";
 
             if (query.value("password") != ""){
 
@@ -200,9 +218,14 @@ void login(ix::WebSocket *webSocket, JSON received){
 
                 if (password == QString::fromStdString(received["password"])) {
 
-                    respuesta["operationSuccess"] = "true";
                     log = true;
                     qDebug() << log;
+                    respuesta["operation"] = log;
+                    respuesta["nombreus"] = query.value("nombre").toString().toStdString();
+                    respuesta["apellidous"] = query.value("apellidos").toString().toStdString();
+                    qDebug() << query.value("nombre").toString();
+
+
                 } else {
 
                     qDebug() << "La contraseña es incorrecta.";
@@ -215,13 +238,54 @@ void login(ix::WebSocket *webSocket, JSON received){
      else {
         qDebug() << "No se ha encontrado el email. Registrate por favor.";
     }
+
+
+    std::string messageToSend = respuesta.dump();
+    webSocket->send(messageToSend);
+}
+
+void catalogo(ix::WebSocket *webSocket, JSON received){
+
+    JSON respuesta;
+    QSqlQuery query;
+    query.prepare("SELECT nombre, descripcion, precio FROM productos");
+    query.exec();
+
+    respuesta["type"] = "articulos";
+
+    JSON elementos;
+
+    while (query.next()){
+        elementos["nom"] = query.value("nombre").toString().toStdString();
+        elementos["des"] = query.value("descripcion").toString().toStdString();
+        elementos["pre"] = query.value("precio").toString().toStdString();
+
+        respuesta["artic"].push_back(elementos);
+    }
+
+    if (query.size() !=1) respuesta["operation"] = true;
+    else respuesta["operation"] = false;
+
+    std::string messageToSend = respuesta.dump();
+    webSocket->send(messageToSend);
+
+}
+
+
+void logout(ix::WebSocket *webSocket, JSON received){
     JSON jsonMessage = {
-           {"action", "OperacionLogin"},
-           {"operationSuccess", true},
+        {"action", "logout"},
+        {"operation", true},
     };
 
     std::string messageToSend = jsonMessage.dump();
     webSocket->send(messageToSend);
+
+    g_log = false;
+}
+
+void borrarUser(ix::WebSocket *webSocket, JSON received) {
+
 }
 
 /*void compraCarrito(ix::WebSocket *webSocket, JSON received){
@@ -295,6 +359,7 @@ JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const 
                 {
 
                     login(webSocket.get(), mensaje);
+                    catalogo(webSocket.get(), mensaje);
 
                 }
 
@@ -303,6 +368,11 @@ JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const 
 
                     //compraCarrito(webSocket.get(), mensaje);
 
+                }
+
+                if(mensaje["action"] == "logout")
+                {
+                    logout(webSocket.get(), mensaje);
                 }
             }
             return resultado;

@@ -9,29 +9,15 @@
 	<body>
 	<center>
 	<div>
-		<div id="header">
-		<img src="../images/banner-adidas.jpg" width="1200" height="150">
-		<ul>
-  			<li><a href="home.html">Inicio</a></li>
-  			<li><a href="catalogo.html">Catalogo</a></li>
-  			<li><a href="historia.html">Nuestra historia</a></li>
-  			<li><a href="contacto.html">Contacto</a></li>
-			<li><a class="login" href="index.html">Login/Register</a></li> 
-		</ul>
+		<div id="header" style="display: block">
+            <img src="../images/banner-adidas.jpg" width="1200" height="150">
 		</div>
 	</center>
-	<div class="row">
-		<div class="col-2" vertical-align="center">
-			<a href="home.html"><img src="../images/69524.png" width="65" height="65" hspace="10" /></a>
-			<a href="carrito.html"><img src="../images/107831.png" width="65" height="65" hspace="10"/></a>
-			<a href="busqueda.html"><img src="../images/14-512.png" width="65" height="65" hspace="15"/></a>
-  			<br><br>
-  			<a href="catalogo.html"><img src="../images/womenadidas.jpg" width="290" height="340"/></a>
- 		</div>
-		<div class="col-8">
-		<center>
+	<div>
+	<center>
+		<div id="log" style="display: block">
 			<h1>Bienvenido a Adidas</h1>
-		<form action="home.html" id="login" target="_blank" method="get">
+		<form id="login" onsubmit="cargarUsuario(); return false">
 			<table>
 				<tbody>
 				<tr><td><b>Email:</b></td></tr>
@@ -41,13 +27,169 @@
 				<tr><td>Para registrarse haga click <a href="register.html"><b>aqui</b></a></td></tr>
 				</tbody>
 			</table>
-			<input name = "log" id="log" type="submit" value="Entrar" onClick="cargarUsuario()"></input>
+			<input name = "log" id="log" type="submit" value="Entrar"></input>
 			<input type="reset">
 		</form>
-		</center>
   		</div>
+  		<div class="col-3 aside" id="paneluser" style="display: none">
+			<h2>Bienvenido:</h2>
+      		<b><font size="10"><text id="nombreuser"></text>&nbsp;<text id="apellidosuser"></text></font></b>
+      		<h2>Opciones:</h2>
+      		<button class="comp" onclick="logout()">Log out</button><br><br>
+      		<button class="comp" id="">Eliminar usuario</button> 
+     		
+  		</div>
+  		<div class="col-9" id="prod" style="display: none">
+  		catalogo(mensaje);
+			<!--<article class="box">
+				<img src="../productos/chaqueta1.jpg" width="250" height="300"/>
+				<h1 class="product"></h1>
+				<p class="desc">Esta chaqueta reedita el chandal adidas Sportive de 1995.</p>
+				<h2 class="price">109.99 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/chaqueta2.jpg" width="250" height="300"/>
+				<h1 class="product">Chaqueta Radkin</h1>
+				<p class="desc">Cuenta con inserciones de tejido tecnico y 3 bandas.</p>
+				<h2 class="price">54.99 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/chaqueta3.jpg" width="250" height="300"/>
+				<h1 class="product">Chaqueta Firebird</h1>
+				<p class="desc">Chaqueta adidas de color verde con estampado para mujer.</p>
+				<h2 class="price">63.00 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/chaqueta4.jpg" width="250" height="300"/>
+				<h1 class="product">Chaqueta Core s10</h1>
+				<p class="desc">Chaqueta cortavientos con colour block Adidas Originals.</p>
+				<h2 class="price">51.87 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/camiseta1.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas California</h1>
+				<p class="desc">Logotipo del trebol Adidas en la parte delantera.</p>
+				<h2 class="price">22.70 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/camiseta2.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas Original</h1>
+				<p class="desc">Original para hombre con el logotipo de Colourblock.</p>
+				<h2 class="price">28.99 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/camiseta3.jpg" width="250" height="300"/>
+				<h1 class="product">Real Madrid CF</h1>
+				<p class="desc">Elegante equipacion visitante para mujer.</p>
+				<h2 class="price">80.00 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/camiseta4.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas 3 stripes</h1>
+				<p class="desc">3 bandas blancas en contraste en las mangas.</p>
+				<h2 class="price">31.99 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/pant1.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas SST TP</h1>
+				<p class="desc">Pantalon con una silueta ajustada.</p>
+				<h2 class="price">55.96 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/pant2.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas BR 2159</h1>
+				<p class="desc">Pantalon 3 Rayas Gris/negro para hombres.</p>
+				<h2 class="price">42.00 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/pant3.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas SST TPW</h1>
+				<p class="desc">Pantalon 3 Rayas con cierre en las botamangas para mujer.</p>
+				<h2 class="price">58.00 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/pant4.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas Ori gris</h1>
+				<p class="desc">Pantalon Originals estilo Tape Flecee para mujer.</p>
+				<h2 class="price">42.60 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/zap1.jpg" width="250" height="300"/>
+				<h1 class="product">Swift Run Orbrut</h1>
+				<p class="desc">Deportivas hombre Adidas Originals Noiess/Ftwbla.</p>
+				<h2 class="price">79.99 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/zap2.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas Gazelle</h1>
+				<p class="desc">Adidas Originals Gazelle azul marino/Sneakers tenis.</p>
+				<h2 class="price">74.59 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/zap3.jpg" width="250" height="300"/>
+				<h1 class="product">Adidas AllStars</h1>
+				<p class="desc">Adidas AllStars son la ultima moda en zapatos de mujer.</p>
+				<h2 class="price">65.00 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>
+			<article class="box">
+				<img src="../productos/zap4.jpg" width="250" height="300"/>
+				<h1 class="product">Black W Gazelle</h1>
+				<p class="desc">Adidas Black Gazelle de cuerno para mujer.</p>
+				<h2 class="price">69.00 &#8364;</h2>
+				<form action="carrito.html">
+					<input class="comp" type="submit" value="Comprar"/>
+				</form>
+			</article>-->
+			<br><br><br><br><br><br>
+  		</div>
+  		</center>
 	</div>
-	<div class="footer">
+	<div class="footer" style="display: block">
   		<img src="../images/insta.png" width="25" height="25" hspace="10" />
   		<img src="../images/twitter.png" width="25" height="25" hspace="10" />
   		<img src="../images/facebook.png" width="25" height="25" hspace="10" /><br>

@@ -2,6 +2,133 @@
 //Conexión WebSocket con servidor
 let socket = new WebSocket("ws://localhost:9990");
 
+socket.onopen = function(e) {
+    alert("[open] Connection established");
+};
+
+socket.onmessage = function(event){
+    console.log(event.data);
+    var mensaje = JSON.parse(event.data);
+    if (mensaje.action == "Login")
+    {
+        if (mensaje.operation == true) {
+            document.getElementById("log").style.display="none";
+            document.getElementById("prod").style.display="block";   
+            document.getElementById("paneluser").style.display="block"; 
+            document.getElementById("nombreuser").appendChild(document.createTextNode(mensaje.nombreus)); 
+            document.getElementById("apellidosuser").appendChild(document.createTextNode(mensaje.apellidous));
+            for (var i = 0; i < Object.keys(mensaje.artic).length; i++) {
+             console.log(mensaje.artic);   
+            }
+            
+            for (var i = 0; i < Object.keys(mensaje.artic.nom).length; i++) {
+        
+        var div = document.createElement("div");
+        div.id="Articulo";
+        var nombres = document.createElement("nombre");
+        nombre.style.display = "block";
+        var nombre = document.createTextNode("Nombre: " + mensaje.art.nom[i]);
+        nombres.appendChild(nombre);
+        
+        var desc = document.createElement("descripción");
+        desc.style.display = "block";
+        var des = document.createTextNode("Descripción: " + mensaje.art.des[i]);
+        desc.appendChild(des);
+        
+        var prec = document.createElement("precio");
+        prec.style.display = "block";
+        var pre = document.createTextNode("Precio: " + mensaje.art.pre[i]);
+        prec.appendChild(pre);
+        
+        var boton = document.createElement("input");
+        boton.type = "button";
+        boton.value = "X";
+        boton.style.backgroundColor = "blue";
+        boton.position = "relative";
+        boton.style.float = "right";
+        boton.style.marginRight = "50px";
+        boton.onClick = function() {};
+        
+        div.appendChild(nombres);
+        div.appendChild(desc);
+        div.appendChild(prec);
+        
+        var capa = document.getElementById("prod");
+        
+        capa.appendChild(div);
+    } 
+        } else alert("Usuario incorrecto.")
+}
+}
+
+socket.onclose = function(event) {
+    if (event.wasClean) {
+        //alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+    } else {
+        alert('[close] Connection died');
+    }
+};
+
+socket.onerror = function(error) {
+    alert(`[error] ${error.mensaje}`);
+};
+
+/*function catalogo(mensaje){
+    for (var i = 0; i < Object.keys(mensaje.art.nom).length; i++) {
+        
+        var div = document.createElement("div");
+        div.id="Articulo";
+        var nombres = document.createElement("nombre");
+        nombre.style.display = "block";
+        var nombre = document.createTextNode("Nombre: " + mensaje.art.nom[i]);
+        nombres.appendChild(nombre);
+        
+        var desc = document.createElement("descripción");
+        desc.style.display = "block";
+        var des = document.createTextNode("Descripción: " + mensaje.art.des[i]);
+        desc.appendChild(des);
+        
+        var prec = document.createElement("precio");
+        prec.style.display = "block";
+        var pre = document.createTextNode("Precio: " + mensaje.art.pre[i]);
+        prec.appendChild(pre);
+        
+        var boton = document.createElement("input");
+        boton.type = "button";
+        boton.value = "X";
+        boton.style.backgroundColor = "blue";
+        boton.position = "relative";
+        boton.style.float = "right";
+        boton.style.marginRight = "50px";
+        boton.onClick = function() {};
+        
+        div.appendChild(nombres);
+        div.appendChild(desc);
+        div.appendChild(prec);
+        
+        var capa = document.getElementById("prod");
+        
+        capa.appendChild(div);
+    } 
+}*/
+
+
+function logout()
+{
+    document.getElementById("log").style.display="block";
+    document.getElementById("prod").style.display="none";   
+    document.getElementById("paneluser").style.display="none";
+    var Json = {action: "logout"};
+    socket.send(JSON.stringify(Json));
+}
+
+/*function changeLoginStatus(mensaje) {
+    var exito = String(mensaje.operation).localeCompare("true") == 0;
+    
+    if (exito) {
+        if (logged)
+}*/
+
 class Usuario {
     
     constructor(id, nombre, apellidos, email, tlf, pass, fecha, gen, nacionalidad, prov, dir) {
@@ -116,6 +243,17 @@ function cargarUsuario()
     }
     mensajesEsperandoRespuesta.push(mensaje); 
     
+}
+
+function cargarProductos()
+{
+    var prod1 = "Chaqueta Adidas Sportive Black"
+    var prod2 = "Chaqueta Radkin"
+    var prod3 = "Chaqueta Firebird"
+    var prod4 = "Chaqueta Core S10"
+    
+    var Json = {action:"cargarProductos", prod1:prod1, prod2:prod2, prod3:prod3, prod4:prod4};
+    socket.send(JSON.stringify(Json));
 }
 
 function compraCarrito()

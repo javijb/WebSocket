@@ -236,7 +236,7 @@ void User::cargar(int id)
  * @brief Permite borrar un usuario registrado.
  * @param id
  */
-void User::remove(int id)
+void User::borrar(int id)
 {
 
     QSqlQuery query;
