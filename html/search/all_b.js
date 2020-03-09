@@ -8,5 +8,6 @@ var searchData=
   ['literal_5for_5fvalue',['literal_or_value',['../classnlohmann_1_1detail_1_1lexer.html#a3f313cdbe187cababfc5e06f0b69b098ad2a8e6f6721cccec0b466301dd9495a5',1,'nlohmann::detail::lexer']]],
   ['literal_5ftrue',['literal_true',['../classnlohmann_1_1detail_1_1lexer.html#a3f313cdbe187cababfc5e06f0b69b098a85cc1a37b0aaa52de40e72f0ed4e0c0d',1,'nlohmann::detail::lexer']]],
   ['little_5fendianess',['little_endianess',['../classnlohmann_1_1detail_1_1binary__reader.html#a1e31dbfcf9567c8c2d4f0e4eb1b0230a',1,'nlohmann::detail::binary_reader']]],
-  ['login',['login',['../servidor_8cpp.html#aa0de743810546ed0f66ae69e19b7996c',1,'servidor.cpp']]]
+  ['login',['login',['../servidor_8cpp.html#aa0de743810546ed0f66ae69e19b7996c',1,'servidor.cpp']]],
+  ['logout',['logout',['../servidor_8cpp.html#a2f396a841670ab1dae2f5aa727403b9f',1,'servidor.cpp']]]
 ];

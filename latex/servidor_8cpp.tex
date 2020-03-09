@@ -10,8 +10,25 @@
 \item 
 void \mbox{\hyperlink{servidor_8cpp_ad6ec5d0ede794dcfd174a2f699679f40}{user\+Nuevo}} (ix\+::\+Web\+Socket $\ast$web\+Socket, \mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}} received)
 \begin{DoxyCompactList}\small\item\em Creamos la función user\+Nuevo, que nos permite recibir el mensaje Json del html, llamar a la función save() del \mbox{\hyperlink{user_8cpp}{user.\+cpp}} y almacenar los datos seleccionados en la base de datos de la aplicación. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{servidor_8cpp_ae8313c72e1672f19cba3958295d3aa46}\label{servidor_8cpp_ae8313c72e1672f19cba3958295d3aa46}} 
+void {\bfseries usercheck} (ix\+::\+Web\+Socket $\ast$web\+Socket)
+\item 
 void \mbox{\hyperlink{servidor_8cpp_aa0de743810546ed0f66ae69e19b7996c}{login}} (ix\+::\+Web\+Socket $\ast$web\+Socket, \mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}} received)
-\begin{DoxyCompactList}\small\item\em Creamos la función login, que nos permite coger un usuario ya creado (email y contraseña) y poder loggearse, en el caso de tener los datos incorrectos, no te permite loggearte. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Creamos la función login, que nos permite coger un usuario ya creado (email y contraseña) y poder loggearse, en el caso de tener los datos incorrectos, no te permite loggearte. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{servidor_8cpp_a2f396a841670ab1dae2f5aa727403b9f}{logout}} (ix\+::\+Web\+Socket $\ast$web\+Socket, \mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}} received)
+\begin{DoxyCompactList}\small\item\em Intento de compra de un solo producto + confirmación de la compra. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{servidor_8cpp_a2126c61557a30188e882b38a0425094d}\label{servidor_8cpp_a2126c61557a30188e882b38a0425094d}} 
+void {\bfseries borrar\+User} (ix\+::\+Web\+Socket $\ast$web\+Socket, \mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}} received)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{servidor_8cpp_a15549b6f72aeeef484b4db8013717e72}\label{servidor_8cpp_a15549b6f72aeeef484b4db8013717e72}} 
+bool {\bfseries g\+\_\+log}
+\item 
+\mbox{\Hypertarget{servidor_8cpp_a6856eb8a675230a838c71b9e67744d1c}\label{servidor_8cpp_a6856eb8a675230a838c71b9e67744d1c}} 
+int {\bfseries g\+\_\+id}
+\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -32,7 +49,71 @@ Creamos la función login, que nos permite coger un usuario ya creado (email y c
 {\em received} & \\
 \hline
 \end{DoxyParams}
-consulta para buscar el usuario solicitado en la B\+B\+DD \mbox{\Hypertarget{servidor_8cpp_ad6ec5d0ede794dcfd174a2f699679f40}\label{servidor_8cpp_ad6ec5d0ede794dcfd174a2f699679f40}} 
+consulta para buscar el usuario solicitado en la B\+B\+DD \mbox{\Hypertarget{servidor_8cpp_a2f396a841670ab1dae2f5aa727403b9f}\label{servidor_8cpp_a2f396a841670ab1dae2f5aa727403b9f}} 
+\index{servidor.\+cpp@{servidor.\+cpp}!logout@{logout}}
+\index{logout@{logout}!servidor.\+cpp@{servidor.\+cpp}}
+\subsubsection{\texorpdfstring{logout()}{logout()}}
+{\footnotesize\ttfamily void logout (\begin{DoxyParamCaption}\item[{ix\+::\+Web\+Socket $\ast$}]{web\+Socket,  }\item[{\mbox{\hyperlink{classnlohmann_1_1basic__json}{J\+S\+ON}}}]{received }\end{DoxyParamCaption})}
+
+
+
+Intento de compra de un solo producto + confirmación de la compra. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em web\+Socket} & \\
+\hline
+{\em received} & void compra\+Producto(ix\+::\+Web\+Socket $\ast$web\+Socket, J\+S\+O\+N received)\{ J\+S\+ON respuesta; bool compra; Q\+Sql\+Query query; query.\+prepare(\char`\"{}\+S\+E\+L\+E\+C\+T $\ast$ F\+R\+O\+M productos where nombre = \+:nombre\char`\"{}); query.\+bind\+Value(\char`\"{}\+:nombre\char`\"{}, Q\+String\+::from\+Std\+String(received\mbox{[}\char`\"{}nombre\char`\"{}\mbox{]})); query.\+exec();\\
+\hline
+\end{DoxyParams}
+q\+Debug() $<$$<$ query.\+value(\char`\"{}nombre\char`\"{}).to\+String();
+
+if (query.\+exec() == true) \{ query.\+next(); respuesta\mbox{[}\char`\"{}action\char`\"{}\mbox{]} = \char`\"{}compra\+Realizada\char`\"{}; respuesta\mbox{[}\char`\"{}nombreprod\char`\"{}\mbox{]} = query.\+value(\char`\"{}nombre\char`\"{}).to\+String().to\+Std\+String(); respuesta\mbox{[}\char`\"{}descripcionprod\char`\"{}\mbox{]} = query.\+value(\char`\"{}descripcion\char`\"{}).to\+String().to\+Std\+String(); respuesta\mbox{[}\char`\"{}precioprod\char`\"{}\mbox{]} = query.\+value(\char`\"{}precio\char`\"{}).to\+String().to\+Std\+String(); compra = true;
+
+\}else \{ q\+Debug() $<$$<$ \char`\"{}\+Ha habido un fallo en la compra.\char`\"{}; compra = false; \}
+
+J\+S\+ON json\+Message = \{ \{\char`\"{}action\char`\"{}, \char`\"{}compra\+Realizada\char`\"{}\}, \{\char`\"{}operation\char`\"{}, compra\}, \};
+
+std\+::string message\+To\+Send = json\+Message.\+dump(); web\+Socket-\/$>$send(message\+To\+Send);
+
+\} Intento de imprimir catálogo desde la bbdd pero no ha salido bien. 
+\begin{DoxyParams}{Parameters}
+{\em web\+Socket} & \\
+\hline
+{\em received} & void catalogo(ix\+::\+Web\+Socket $\ast$web\+Socket, J\+S\+O\+N received)\{ \begin{DoxyVerb}JSON respuesta;
+QSqlQuery query;
+query.prepare("SELECT nombre, descripcion, precio FROM productos");
+query.exec();
+
+respuesta["type"] = "articulos";
+
+JSON elementos;
+
+while (query.next()){
+    elementos["nom"] = query.value("nombre").toString().toStdString();
+    elementos["des"] = query.value("descripcion").toString().toStdString();
+    elementos["pre"] = query.value("precio").toString().toStdString();
+
+    respuesta["artic"].push_back(elementos);
+}
+
+if (query.size() !=1) respuesta["operation"] = true;
+else respuesta["operation"] = false;
+
+std::string messageToSend = respuesta.dump();
+webSocket->send(messageToSend);
+\end{DoxyVerb}
+\\
+\hline
+\end{DoxyParams}
+\} Función para salir del usuario. 
+\begin{DoxyParams}{Parameters}
+{\em web\+Socket} & \\
+\hline
+{\em received} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{servidor_8cpp_ad6ec5d0ede794dcfd174a2f699679f40}\label{servidor_8cpp_ad6ec5d0ede794dcfd174a2f699679f40}} 
 \index{servidor.\+cpp@{servidor.\+cpp}!user\+Nuevo@{user\+Nuevo}}
 \index{user\+Nuevo@{user\+Nuevo}!servidor.\+cpp@{servidor.\+cpp}}
 \subsubsection{\texorpdfstring{user\+Nuevo()}{userNuevo()}}

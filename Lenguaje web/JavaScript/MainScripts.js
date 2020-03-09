@@ -17,48 +17,11 @@ socket.onmessage = function(event){
             document.getElementById("paneluser").style.display="block"; 
             document.getElementById("nombreuser").appendChild(document.createTextNode(mensaje.nombreus)); 
             document.getElementById("apellidosuser").appendChild(document.createTextNode(mensaje.apellidous));
-            for (var i = 0; i < Object.keys(mensaje.artic).length; i++) {
-             console.log(mensaje.artic);   
-            }
             
-            for (var i = 0; i < Object.keys(mensaje.artic.nom).length; i++) {
-        
-        var div = document.createElement("div");
-        div.id="Articulo";
-        var nombres = document.createElement("nombre");
-        nombre.style.display = "block";
-        var nombre = document.createTextNode("Nombre: " + mensaje.art.nom[i]);
-        nombres.appendChild(nombre);
-        
-        var desc = document.createElement("descripción");
-        desc.style.display = "block";
-        var des = document.createTextNode("Descripción: " + mensaje.art.des[i]);
-        desc.appendChild(des);
-        
-        var prec = document.createElement("precio");
-        prec.style.display = "block";
-        var pre = document.createTextNode("Precio: " + mensaje.art.pre[i]);
-        prec.appendChild(pre);
-        
-        var boton = document.createElement("input");
-        boton.type = "button";
-        boton.value = "X";
-        boton.style.backgroundColor = "blue";
-        boton.position = "relative";
-        boton.style.float = "right";
-        boton.style.marginRight = "50px";
-        boton.onClick = function() {};
-        
-        div.appendChild(nombres);
-        div.appendChild(desc);
-        div.appendChild(prec);
-        
-        var capa = document.getElementById("prod");
-        
-        capa.appendChild(div);
-    } 
-        } else alert("Usuario incorrecto.")
-}
+    } else alert("Usuario incorrecto.")
+                
+} 
+
 }
 
 socket.onclose = function(event) {
@@ -245,18 +208,24 @@ function cargarUsuario()
     
 }
 
-function cargarProductos()
+
+function compraProducto()
 {
-    var prod1 = "Chaqueta Adidas Sportive Black"
-    var prod2 = "Chaqueta Radkin"
-    var prod3 = "Chaqueta Firebird"
-    var prod4 = "Chaqueta Core S10"
     
-    var Json = {action:"cargarProductos", prod1:prod1, prod2:prod2, prod3:prod3, prod4:prod4};
+    alert("Has comprado el artículo.")
+    // 1) Crear JSON que se envia al servidor
+    /*var nombre = document.getElementsByName("nombre").textContent;
+    var descripcion = document.getElementsByName("descripcion").innerHTML;
+    var precio = document.getElementsByName("precio").innerText;
+    var idMensaje = dameId();
+    var Json = {action:"compraProducto", id:idMensaje, nombre:nombre, descripcion:descripcion, precio:precio};
     socket.send(JSON.stringify(Json));
+    
+    console.log(nombre);*/
+    
 }
 
-function compraCarrito()
+/*function compraCarrito()
 {
     // 1) Crear JSON que se envia al servidor
     var producto1 = document.getElementById("nom1").value;
@@ -293,7 +262,7 @@ function compraCarrito()
         
     }
     mensajesEsperandoRespuesta.push(mensaje); 
-}
+}*/
 
 //Mensajes JSON
 function mensajeEspera(id)

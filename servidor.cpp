@@ -204,7 +204,7 @@ void login(ix::WebSocket *webSocket, JSON received){
     JSON respuesta;
     ///consulta para buscar el usuario solicitado en la BBDD
     QSqlQuery query;
-    query.prepare("SELECT nombre, apellidos, email, password FROM public.user WHERE email = :email");
+    query.prepare("SELECT nombre, apellidos, email, password FROM public.user WHERE email = :email and password = crypt(:password , password)");
     query.bindValue(":email",  QString::fromStdString(received["email"]));
     query.bindValue(":password",  QString::fromStdString(received["password"]));
 
@@ -214,9 +214,8 @@ void login(ix::WebSocket *webSocket, JSON received){
 
             if (query.value("password") != ""){
 
-                QString password = query.value("password").toString();
+                //QString password = query.value("password").toString();
 
-                if (password == QString::fromStdString(received["password"])) {
 
                     log = true;
                     qDebug() << log;
@@ -226,25 +225,70 @@ void login(ix::WebSocket *webSocket, JSON received){
                     qDebug() << query.value("nombre").toString();
 
 
-                } else {
+            } else {
 
-                    qDebug() << "La contraseña es incorrecta.";
-
-                }
+                qDebug() << "La contraseña es incorrecta.";
 
             }
+
+
     }
 
      else {
-        qDebug() << "No se ha encontrado el email. Registrate por favor.";
+        qDebug() << "No se ha encontrado el usuario. Registrate por favor.";
     }
 
 
     std::string messageToSend = respuesta.dump();
     webSocket->send(messageToSend);
 }
+/**
+ * @brief Intento de compra de un solo producto + confirmación de la compra.
+ * @param webSocket
+ * @param received
+ */
 
-void catalogo(ix::WebSocket *webSocket, JSON received){
+/**void compraProducto(ix::WebSocket *webSocket, JSON received){
+    JSON respuesta;
+    bool compra;
+    QSqlQuery query;
+    query.prepare("SELECT * FROM productos where nombre = :nombre");
+    query.bindValue(":nombre",  QString::fromStdString(received["nombre"]));
+    query.exec();
+
+    qDebug() << query.value("nombre").toString();
+
+    if (query.exec() == true) {
+            query.next();
+            respuesta["action"] = "compraRealizada";
+            respuesta["nombreprod"] = query.value("nombre").toString().toStdString();
+            respuesta["descripcionprod"] = query.value("descripcion").toString().toStdString();
+            respuesta["precioprod"] = query.value("precio").toString().toStdString();
+            compra = true;
+
+    }else {
+            qDebug() << "Ha habido un fallo en la compra.";
+            compra = false;
+    }
+
+    JSON jsonMessage = {
+        {"action", "compraRealizada"},
+        {"operation", compra},
+    };
+
+    std::string messageToSend = jsonMessage.dump();
+    webSocket->send(messageToSend);
+
+
+}*/
+
+/**
+ * @brief Intento de imprimir catálogo desde la bbdd pero no ha salido bien.
+ * @param webSocket
+ * @param received
+ */
+
+/**void catalogo(ix::WebSocket *webSocket, JSON received){
 
     JSON respuesta;
     QSqlQuery query;
@@ -269,8 +313,13 @@ void catalogo(ix::WebSocket *webSocket, JSON received){
     std::string messageToSend = respuesta.dump();
     webSocket->send(messageToSend);
 
-}
+}*/
 
+/**
+ * @brief Función para salir del usuario.
+ * @param webSocket
+ * @param received
+ */
 
 void logout(ix::WebSocket *webSocket, JSON received){
     JSON jsonMessage = {
@@ -359,7 +408,7 @@ JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const 
                 {
 
                     login(webSocket.get(), mensaje);
-                    catalogo(webSocket.get(), mensaje);
+                    //catalogo(webSocket.get(), mensaje);
 
                 }
 
@@ -368,6 +417,9 @@ JSON Servidor::nuevoMensajeJSON(std::shared_ptr<ix::WebSocket> webSocket, const 
 
                     //compraCarrito(webSocket.get(), mensaje);
 
+                }
+                if(mensaje["action"] == "compraProducto"){
+                   // compraProducto(webSocket.get(), mensaje);
                 }
 
                 if(mensaje["action"] == "logout")

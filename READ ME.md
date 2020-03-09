@@ -24,7 +24,7 @@ IMPORTANTE (Es necesario tener implementadas las librerías de IXWebsocket.)
 
 1-. El cliente deberá abrir su navegador y con ello, la aplicación. 
 
-2-. Entonces podrá ver una interfaz de usuario con un menú, en el cual verá la opción de login/register, y deberá entrar allí. (Usuario de prueba: email: usuario@user.com password: user)
+2-. Entonces podrá ver una interfaz de usuario con un menú, en el cual verá la opción de login/register, y deberá entrar allí. (Usuario de prueba: email: jjj@gmail.com password: hola)
 
 3-. Ya en el formulario puedes o loggearte en el caso de que ya tengas un usuario, o registrarte. (Es imprescindible tener un usuario para realizar una compra en la tienda.)
 

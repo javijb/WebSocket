@@ -62,7 +62,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">servidor.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -78,9 +79,27 @@ Functions</h2></td></tr>
 <tr class="memitem:ad6ec5d0ede794dcfd174a2f699679f40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="servidor_8cpp.html#ad6ec5d0ede794dcfd174a2f699679f40">userNuevo</a> (ix::WebSocket *webSocket, <a class="el" href="classnlohmann_1_1basic__json.html">JSON</a> received)</td></tr>
 <tr class="memdesc:ad6ec5d0ede794dcfd174a2f699679f40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creamos la función userNuevo, que nos permite recibir el mensaje Json del html, llamar a la función save() del <a class="el" href="user_8cpp.html">user.cpp</a> y almacenar los datos seleccionados en la base de datos de la aplicación.  <a href="#ad6ec5d0ede794dcfd174a2f699679f40">More...</a><br /></td></tr>
 <tr class="separator:ad6ec5d0ede794dcfd174a2f699679f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8313c72e1672f19cba3958295d3aa46"><td class="memItemLeft" align="right" valign="top"><a id="ae8313c72e1672f19cba3958295d3aa46"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>usercheck</b> (ix::WebSocket *webSocket)</td></tr>
+<tr class="separator:ae8313c72e1672f19cba3958295d3aa46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0de743810546ed0f66ae69e19b7996c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="servidor_8cpp.html#aa0de743810546ed0f66ae69e19b7996c">login</a> (ix::WebSocket *webSocket, <a class="el" href="classnlohmann_1_1basic__json.html">JSON</a> received)</td></tr>
 <tr class="memdesc:aa0de743810546ed0f66ae69e19b7996c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creamos la función login, que nos permite coger un usuario ya creado (email y contraseña) y poder loggearse, en el caso de tener los datos incorrectos, no te permite loggearte.  <a href="#aa0de743810546ed0f66ae69e19b7996c">More...</a><br /></td></tr>
 <tr class="separator:aa0de743810546ed0f66ae69e19b7996c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f396a841670ab1dae2f5aa727403b9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="servidor_8cpp.html#a2f396a841670ab1dae2f5aa727403b9f">logout</a> (ix::WebSocket *webSocket, <a class="el" href="classnlohmann_1_1basic__json.html">JSON</a> received)</td></tr>
+<tr class="memdesc:a2f396a841670ab1dae2f5aa727403b9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intento de compra de un solo producto + confirmación de la compra.  <a href="#a2f396a841670ab1dae2f5aa727403b9f">More...</a><br /></td></tr>
+<tr class="separator:a2f396a841670ab1dae2f5aa727403b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2126c61557a30188e882b38a0425094d"><td class="memItemLeft" align="right" valign="top"><a id="a2126c61557a30188e882b38a0425094d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>borrarUser</b> (ix::WebSocket *webSocket, <a class="el" href="classnlohmann_1_1basic__json.html">JSON</a> received)</td></tr>
+<tr class="separator:a2126c61557a30188e882b38a0425094d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a15549b6f72aeeef484b4db8013717e72"><td class="memItemLeft" align="right" valign="top"><a id="a15549b6f72aeeef484b4db8013717e72"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>g_log</b></td></tr>
+<tr class="separator:a15549b6f72aeeef484b4db8013717e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6856eb8a675230a838c71b9e67744d1c"><td class="memItemLeft" align="right" valign="top"><a id="a6856eb8a675230a838c71b9e67744d1c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>g_id</b></td></tr>
+<tr class="separator:a6856eb8a675230a838c71b9e67744d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aa0de743810546ed0f66ae69e19b7996c"></a>
@@ -118,6 +137,84 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>consulta para buscar el usuario solicitado en la BBDD </p>
+
+</div>
+</div>
+<a id="a2f396a841670ab1dae2f5aa727403b9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f396a841670ab1dae2f5aa727403b9f">&#9670;&nbsp;</a></span>logout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logout </td>
+          <td>(</td>
+          <td class="paramtype">ix::WebSocket *&#160;</td>
+          <td class="paramname"><em>webSocket</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classnlohmann_1_1basic__json.html">JSON</a>&#160;</td>
+          <td class="paramname"><em>received</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Intento de compra de un solo producto + confirmación de la compra. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">webSocket</td><td></td></tr>
+    <tr><td class="paramname">received</td><td>void compraProducto(ix::WebSocket *webSocket, JSON received){ JSON respuesta; bool compra; QSqlQuery query; query.prepare("SELECT * FROM productos where nombre = :nombre"); query.bindValue(":nombre", QString::fromStdString(received["nombre"])); query.exec();</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>qDebug() &lt;&lt; query.value("nombre").toString();</p>
+<p>if (query.exec() == true) { query.next(); respuesta["action"] = "compraRealizada"; respuesta["nombreprod"] = query.value("nombre").toString().toStdString(); respuesta["descripcionprod"] = query.value("descripcion").toString().toStdString(); respuesta["precioprod"] = query.value("precio").toString().toStdString(); compra = true;</p>
+<p>}else { qDebug() &lt;&lt; "Ha habido un fallo en la compra."; compra = false; }</p>
+<p>JSON jsonMessage = { {"action", "compraRealizada"}, {"operation", compra}, };</p>
+<p>std::string messageToSend = jsonMessage.dump(); webSocket-&gt;send(messageToSend);</p>
+<p>} Intento de imprimir catálogo desde la bbdd pero no ha salido bien. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">webSocket</td><td></td></tr>
+    <tr><td class="paramname">received</td><td>void catalogo(ix::WebSocket *webSocket, JSON received){ <pre class="fragment">JSON respuesta;
+QSqlQuery query;
+query.prepare("SELECT nombre, descripcion, precio FROM productos");
+query.exec();
+
+respuesta["type"] = "articulos";
+
+JSON elementos;
+
+while (query.next()){
+    elementos["nom"] = query.value("nombre").toString().toStdString();
+    elementos["des"] = query.value("descripcion").toString().toStdString();
+    elementos["pre"] = query.value("precio").toString().toStdString();
+
+    respuesta["artic"].push_back(elementos);
+}
+
+if (query.size() !=1) respuesta["operation"] = true;
+else respuesta["operation"] = false;
+
+std::string messageToSend = respuesta.dump();
+webSocket-&gt;send(messageToSend);
+</pre></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>} Función para salir del usuario. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">webSocket</td><td></td></tr>
+    <tr><td class="paramname">received</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

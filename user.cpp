@@ -170,7 +170,7 @@ bool User::save()
 {
 
     QSqlQuery query;
-    query.prepare("INSERT INTO public.user (nombre, apellidos, email, telefono, password, fecha_nac, genero, nacionalidad, provincia, direccion) VALUES (:nombre, :apellidos, :email, :telefono, :password, :fecha_nac, :genero, :nacionalidad, :provincia, :direccion);");
+    query.prepare("INSERT INTO public.user (nombre, apellidos, email, telefono, password, fecha_nac, genero, nacionalidad, provincia, direccion) VALUES (:nombre, :apellidos, :email, :telefono, crypt(:password, gen_salt('bf')), :fecha_nac, :genero, :nacionalidad, :provincia, :direccion);");
 
     query.bindValue(":nombre", m_nombre);
     query.bindValue(":apellidos", m_apellidos);

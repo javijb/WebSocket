@@ -10,6 +10,7 @@ var searchData=
   ['binary_5fwriter',['binary_writer',['../classnlohmann_1_1detail_1_1binary__writer.html',1,'nlohmann::detail::binary_writer&lt; BasicJsonType, CharType &gt;'],['../classnlohmann_1_1detail_1_1binary__writer.html#a373289af95a946c19bb4a58a5df71a78',1,'nlohmann::detail::binary_writer::binary_writer()']]],
   ['boolean',['boolean',['../structnlohmann_1_1json__sax.html#a82ed080814fa656191a537284bb0c575',1,'nlohmann::json_sax::boolean()'],['../namespacenlohmann_1_1detail.html#a1ed8fc6239da25abcaf681d30ace4985a84e2c64f38f78ba3ea5c905ab5a2da27',1,'nlohmann::detail::boolean()']]],
   ['boolean_5ft',['boolean_t',['../classnlohmann_1_1basic__json.html#a4c919102a9b4fe0d588af64801436082',1,'nlohmann::basic_json']]],
+  ['borrar',['borrar',['../classUser.html#a82d051296c16957a6a6a41e582c1b963',1,'User']]],
   ['boundaries',['boundaries',['../structnlohmann_1_1detail_1_1dtoa__impl_1_1boundaries.html',1,'nlohmann::detail::dtoa_impl']]],
   ['byte',['byte',['../classnlohmann_1_1detail_1_1parse__error.html#a9505aaa1ca943be927eec7cc579592ff',1,'nlohmann::detail::parse_error']]]
 ];
